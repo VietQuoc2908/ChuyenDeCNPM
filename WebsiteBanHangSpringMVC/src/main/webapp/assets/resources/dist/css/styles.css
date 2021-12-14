@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.form-group .product-img {
+	max-width: 100%;
+	height: 240px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	background: #aaa;
+}
+
+#anhsp {
+	max-width: 100%;
+	height: 240px;
+	object-fit: cover;
+}

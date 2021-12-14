@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<body>
+
 	<div class="slider-area">
 		<!-- Slider -->
 		<div class="block-slider block-slider4">
@@ -403,4 +403,3 @@
 		</div>
 	</div>
 	<!-- End product widget area -->
-</body>

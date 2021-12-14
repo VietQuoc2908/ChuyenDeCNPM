@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
   <body>
 
@@ -135,8 +136,8 @@
                                                 <label class="" for="billing_country">Country <abbr title="required" class="required">*</abbr>
                                                 </label>
                                                 <select class="country_to_state country_select" id="billing_country" name="billing_country">
-                                                    <option value="">Select a country…</option>
-                                                    <option value="AX">Åland Islands</option>
+                                                    <option value="">Select a countryâ¦</option>
+                                                    <option value="AX">Ãland Islands</option>
                                                     <option value="AF">Afghanistan</option>
                                                     <option value="AL">Albania</option>
                                                     <option value="DZ">Algeria</option>
@@ -193,7 +194,7 @@
                                                     <option value="CR">Costa Rica</option>
                                                     <option value="HR">Croatia</option>
                                                     <option value="CU">Cuba</option>
-                                                    <option value="CW">CuraÇao</option>
+                                                    <option value="CW">CuraÃao</option>
                                                     <option value="CY">Cyprus</option>
                                                     <option value="CZ">Czech Republic</option>
                                                     <option value="DK">Denmark</option>
@@ -316,8 +317,8 @@
                                                     <option value="RO">Romania</option>
                                                     <option value="RU">Russia</option>
                                                     <option value="RW">Rwanda</option>
-                                                    <option value="ST">São Tomé and Príncipe</option>
-                                                    <option value="BL">Saint Barthélemy</option>
+                                                    <option value="ST">SÃ£o TomÃ© and PrÃ­ncipe</option>
+                                                    <option value="BL">Saint BarthÃ©lemy</option>
                                                     <option value="SH">Saint Helena</option>
                                                     <option value="KN">Saint Kitts and Nevis</option>
                                                     <option value="LC">Saint Lucia</option>
@@ -467,8 +468,8 @@
                                                     <label class="" for="shipping_country">Country <abbr title="required" class="required">*</abbr>
                                                     </label>
                                                     <select class="country_to_state country_select" id="shipping_country" name="shipping_country">
-                                                        <option value="">Select a country…</option>
-                                                        <option value="AX">Åland Islands</option>
+                                                        <option value="">Select a countryâ¦</option>
+                                                        <option value="AX">Ãland Islands</option>
                                                         <option value="AF">Afghanistan</option>
                                                         <option value="AL">Albania</option>
                                                         <option value="DZ">Algeria</option>
@@ -525,7 +526,7 @@
                                                         <option value="CR">Costa Rica</option>
                                                         <option value="HR">Croatia</option>
                                                         <option value="CU">Cuba</option>
-                                                        <option value="CW">CuraÇao</option>
+                                                        <option value="CW">CuraÃao</option>
                                                         <option value="CY">Cyprus</option>
                                                         <option value="CZ">Czech Republic</option>
                                                         <option value="DK">Denmark</option>
@@ -648,8 +649,8 @@
                                                         <option value="RO">Romania</option>
                                                         <option value="RU">Russia</option>
                                                         <option value="RW">Rwanda</option>
-                                                        <option value="ST">São Tomé and Príncipe</option>
-                                                        <option value="BL">Saint Barthélemy</option>
+                                                        <option value="ST">SÃ£o TomÃ© and PrÃ­ncipe</option>
+                                                        <option value="BL">Saint BarthÃ©lemy</option>
                                                         <option value="SH">Saint Helena</option>
                                                         <option value="KN">Saint Kitts and Nevis</option>
                                                         <option value="LC">Saint Lucia</option>
@@ -793,16 +794,16 @@
                                         <tbody>
                                             <tr class="cart_item">
                                                 <td class="product-name">
-                                                    Ship Your Idea <strong class="product-quantity">× 1</strong> </td>
+                                                    Ship Your Idea <strong class="product-quantity">Ã 1</strong> </td>
                                                 <td class="product-total">
-                                                    <span class="amount">£15.00</span> </td>
+                                                    <span class="amount">Â£15.00</span> </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
 
                                             <tr class="cart-subtotal">
                                                 <th>Cart Subtotal</th>
-                                                <td><span class="amount">£15.00</span>
+                                                <td><span class="amount">Â£15.00</span>
                                                 </td>
                                             </tr>
 
@@ -818,7 +819,7 @@
 
                                             <tr class="order-total">
                                                 <th>Order Total</th>
-                                                <td><strong><span class="amount">£15.00</span></strong> </td>
+                                                <td><strong><span class="amount">Â£15.00</span></strong> </td>
                                             </tr>
 
                                         </tfoot>
@@ -831,7 +832,7 @@
                                                 <input type="radio" data-order_button_text="" checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs">
                                                 <label for="payment_method_bacs">Direct Bank Transfer </label>
                                                 <div class="payment_box payment_method_bacs">
-                                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order wonât be shipped until the funds have cleared in our account.</p>
                                                 </div>
                                             </li>
                                             <li class="payment_method_cheque">
@@ -846,7 +847,7 @@
                                                 <label for="payment_method_paypal">PayPal <img alt="PayPal Acceptance Mark" src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png"><a title="What is PayPal?" onclick="javascript:window.open('https://www.paypal.com/gb/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;" class="about_paypal" href="https://www.paypal.com/gb/webapps/mpp/paypal-popup">What is PayPal?</a>
                                                 </label>
                                                 <div style="display:none;" class="payment_box payment_method_paypal">
-                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                                    <p>Pay via PayPal; you can pay with your credit card if you donât have a PayPal account.</p>
                                                 </div>
                                             </li>
                                         </ul>

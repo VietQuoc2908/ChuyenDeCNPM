@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
   <body>
    
@@ -94,7 +95,7 @@
                                     <tbody>
                                         <tr class="cart_item">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="#">×</a> 
+                                                <a title="Remove this item" class="remove" href="#">Ã</a> 
                                             </td>
 
                                             <td class="product-thumbnail">
@@ -106,7 +107,7 @@
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount">£15.00</span> 
+                                                <span class="amount">Â£15.00</span> 
                                             </td>
 
                                             <td class="product-quantity">
@@ -118,7 +119,7 @@
                                             </td>
 
                                             <td class="product-subtotal">
-                                                <span class="amount">£15.00</span> 
+                                                <span class="amount">Â£15.00</span> 
                                             </td>
                                         </tr>
                                         <tr>
@@ -146,7 +147,7 @@
                                         <a href="single-product.html">
                                             <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-2.jpg">
                                             <h3>Ship Your Idea</h3>
-                                            <span class="price"><span class="amount">£20.00</span></span>
+                                            <span class="price"><span class="amount">Â£20.00</span></span>
                                         </a>
 
                                         <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
@@ -156,7 +157,7 @@
                                         <a href="single-product.html">
                                             <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-4.jpg">
                                             <h3>Ship Your Idea</h3>
-                                            <span class="price"><span class="amount">£20.00</span></span>
+                                            <span class="price"><span class="amount">Â£20.00</span></span>
                                         </a>
 
                                         <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="22" rel="nofollow" href="single-product.html">Select options</a>
@@ -172,7 +173,7 @@
                                     <tbody>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">£15.00</span></td>
+                                            <td><span class="amount">Â£15.00</span></td>
                                         </tr>
 
                                         <tr class="shipping">
@@ -182,7 +183,7 @@
 
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">£15.00</span></strong> </td>
+                                            <td><strong><span class="amount">Â£15.00</span></strong> </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -196,8 +197,8 @@
 
                                 <p class="form-row form-row-wide">
                                 <select rel="calc_shipping_state" class="country_to_state" id="calc_shipping_country" name="calc_shipping_country">
-                                    <option value="">Select a country…</option>
-                                    <option value="AX">Åland Islands</option>
+                                    <option value="">Select a countryâ¦</option>
+                                    <option value="AX">Ãland Islands</option>
                                     <option value="AF">Afghanistan</option>
                                     <option value="AL">Albania</option>
                                     <option value="DZ">Algeria</option>
@@ -254,7 +255,7 @@
                                     <option value="CR">Costa Rica</option>
                                     <option value="HR">Croatia</option>
                                     <option value="CU">Cuba</option>
-                                    <option value="CW">CuraÇao</option>
+                                    <option value="CW">CuraÃao</option>
                                     <option value="CY">Cyprus</option>
                                     <option value="CZ">Czech Republic</option>
                                     <option value="DK">Denmark</option>
@@ -377,8 +378,8 @@
                                     <option value="RO">Romania</option>
                                     <option value="RU">Russia</option>
                                     <option value="RW">Rwanda</option>
-                                    <option value="ST">São Tomé and Príncipe</option>
-                                    <option value="BL">Saint Barthélemy</option>
+                                    <option value="ST">SÃ£o TomÃ© and PrÃ­ncipe</option>
+                                    <option value="BL">Saint BarthÃ©lemy</option>
                                     <option value="SH">Saint Helena</option>
                                     <option value="KN">Saint Kitts and Nevis</option>
                                     <option value="LC">Saint Lucia</option>
