@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Dec 16, 2021, 3:12:49 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.HoaDon" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="HoaDon">
+        <id name="maHd" type="int">
+            <column name="maHD"/>
+            <generator class="native"/>
+        </id>
+        <many-to-one class="pojo.GioHang" embed-xml="true" fetch="select" insert="true" name="gioHang" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="maGH" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="status" optimistic-lock="true" type="java.lang.Integer" unique="false">
+            <column name="status"/>
+        </property>
+    </class>
+</hibernate-mapping>

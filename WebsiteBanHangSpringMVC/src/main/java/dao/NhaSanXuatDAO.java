@@ -40,6 +40,7 @@ public class NhaSanXuatDAO {
 			ses.close();
 		}
 	}
+    
     @Transactional
 	public boolean add(NhaSanXuat nsx, MultipartFile file) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();

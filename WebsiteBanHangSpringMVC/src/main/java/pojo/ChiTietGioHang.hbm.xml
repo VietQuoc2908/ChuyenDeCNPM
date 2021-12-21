@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Dec 16, 2021, 3:12:49 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.ChiTietGioHang" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="ChiTietGioHang">
+        <id name="maCtgh" type="int">
+            <column name="maCTGH"/>
+            <generator class="native"/>
+        </id>
+        <many-to-one class="pojo.DienThoai" embed-xml="true" fetch="select" insert="true" name="dienThoai" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="maDT" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="pojo.GioHang" embed-xml="true" fetch="select" insert="true" name="gioHang" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="maGH" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="soLuong" optimistic-lock="true" type="int" unique="false">
+            <column name="soLuong" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="donGia" optimistic-lock="true" type="double" unique="false">
+            <column name="donGia" not-null="true" precision="53" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="tongTien" optimistic-lock="true" type="double" unique="false">
+            <column name="tongTien" not-null="true" precision="53" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="hienThiTongTien" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="hienThiTongTien" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

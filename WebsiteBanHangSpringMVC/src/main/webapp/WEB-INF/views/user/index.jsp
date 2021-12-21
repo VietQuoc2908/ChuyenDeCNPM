@@ -49,159 +49,44 @@
 	</div>
 	<!-- End slider area -->
 
-	<div class="promo-area">
-		<div class="zigzag-bottom"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3 col-sm-6">
-					<div class="single-promo promo1">
-						<i class="fa fa-refresh"></i>
-						<p>30 Days return</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-promo promo2">
-						<i class="fa fa-truck"></i>
-						<p>Free shipping</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-promo promo3">
-						<i class="fa fa-lock"></i>
-						<p>Secure payments</p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="single-promo promo4">
-						<i class="fa fa-gift"></i>
-						<p>New products</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End promo area -->
-
 	<div class="maincontent-area">
 		<div class="zigzag-bottom"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="latest-product">
-						<h2 class="section-title">Latest Products</h2>
+						<h2 class="section-title">Sản phẩm mới nhất</h2>
 						<div class="product-carousel">
+						<c:forEach items="${list}" var="item" varStatus="idx">
 							<div class="single-product">
 								<div class="product-f-image">
-									<img src="<c:url value="/assets/resources/img/product-1.jpg"/>" alt="">
+									<img style="height:180px; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt="">
 									<div class="product-hover">
 										<a href="#" class="add-to-cart-link"><i
 											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
+											href="./single-product?maDt=${item.maDt}" class="view-details-link"><i
+											class="fa fa-link"></i> Xem chi tiết</a>
 									</div>
 								</div>
 
 								<h2>
-									<a href="single-product.html">Samsung Galaxy s5- 2015</a>
+									<a href="single-product.html"> ${item.tenDt} </a>
 								</h2>
 
+								<c:if test="${item.giamGia > 0}">
 								<div class="product-carousel-price">
-									<ins>$700.00</ins>
-									<del>$100.00</del>
+									<ins> ${item.hienThiThanhTien} </ins>
+									<del> ${item.hienThiGiaBan} </del>
 								</div>
-							</div>
-							<div class="single-product">
-								<div class="product-f-image">
-									<img src="<c:url value="/assets/resources/img/product-2.jpg"/>" alt="">
-									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
-									</div>
-								</div>
-
-								<h2>Nokia Lumia 1320</h2>
+								</c:if>
+								<c:if test="${item.giamGia == 0}">
 								<div class="product-carousel-price">
-									<ins>$899.00</ins>
-									<del>$999.00</del>
+									<ins> ${item.hienThiThanhTien} </ins>
 								</div>
+								</c:if>
 							</div>
-							<div class="single-product">
-								<div class="product-f-image">
-									<img src="<c:url value="/assets/resources/img/product-3.jpg"/>" alt="">
-									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
-									</div>
-								</div>
+						</c:forEach>
 
-								<h2>LG Leon 2015</h2>
-
-								<div class="product-carousel-price">
-									<ins>$400.00</ins>
-									<del>$425.00</del>
-								</div>
-							</div>
-							<div class="single-product">
-								<div class="product-f-image">
-									<img src="<c:url value="/assets/resources/img/product-4.jpg"/>" alt="">
-									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
-									</div>
-								</div>
-
-								<h2>
-									<a href="single-product.html">Sony microsoft</a>
-								</h2>
-
-								<div class="product-carousel-price">
-									<ins>$200.00</ins>
-									<del>$225.00</del>
-								</div>
-							</div>
-							<div class="single-product">
-								<div class="product-f-image">
-									<img src="<c:url value="/assets/resources/img/product-5.jpg"/>" alt="">
-									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
-									</div>
-								</div>
-
-								<h2>iPhone 6</h2>
-
-								<div class="product-carousel-price">
-									<ins>$1200.00</ins>
-									<del>$1355.00</del>
-								</div>
-							</div>
-							<div class="single-product">
-								<div class="product-f-image">
-									<img src="<c:url value="/assets/resources/img/product-6.jpg"/>" alt="">
-									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
-											class="fa fa-shopping-cart"></i> Add to cart</a> <a
-											href="single-product.html" class="view-details-link"><i
-											class="fa fa-link"></i> See details</a>
-									</div>
-								</div>
-
-								<h2>
-									<a href="single-product.html">Samsung gallaxy note 4</a>
-								</h2>
-
-								<div class="product-carousel-price">
-									<ins>$400.00</ins>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -217,14 +102,11 @@
 				<div class="col-md-12">
 					<div class="brand-wrapper">
 						<div class="brand-list">
-							<img src="<c:url value="/assets/resources/img/brand1.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand2.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand3.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand4.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand5.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand6.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand1.png"/>" alt=""> 
-							<img src="<c:url value="/assets/resources/img/brand2.png"/>" alt="">
+						<c:forEach items="${listNSX}" var="item" varStatus="idx">
+						<a href="./shop?maNsx=${item.maNsx}">
+							<img style="width:200px; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt=""> 
+						</a>
+						</c:forEach>
 						</div>
 					</div>
 				</div>

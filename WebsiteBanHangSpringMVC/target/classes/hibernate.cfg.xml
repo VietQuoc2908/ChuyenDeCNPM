@@ -11,10 +11,14 @@
         <property name="hibernate.default_catalog">DienThoaiSpringMVC</property>
         <property name="hibernate.default_schema">dbo</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-    	<property name="hibernate.current_session_context_class">thread</property>
-  		<property name="hibernate.enable_lazy_load_no_trans">true</property>
-  		<mapping resource="pojo/DanhMuc.hbm.xml"/>
-  		<mapping resource="pojo/DienThoai.hbm.xml"/>
-  		<mapping resource="pojo/NhaSanXuat.hbm.xml"/>
+        <property name="hibernate.current_session_context_class">thread</property>
+	  	<property name="hibernate.enable_lazy_load_no_trans">true</property>
+	  	<mapping resource="pojo/DanhMuc.hbm.xml"/>
+	  	<mapping resource="pojo/DienThoai.hbm.xml"/>
+	  	<mapping resource="pojo/NhaSanXuat.hbm.xml"/>
+	  	<mapping resource="pojo/ChiTietGioHang.hbm.xml"/>
+	  	<mapping resource="pojo/GioHang.hbm.xml"/>
+	  	<mapping resource="pojo/HoaDon.hbm.xml"/>
+	  	<mapping resource="pojo/KhachHang.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

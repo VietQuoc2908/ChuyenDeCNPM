@@ -1,5 +1,6 @@
 package dao;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -42,12 +43,34 @@ public class DienThoaiDAO {
 			ses.close();
 		}
 	}
+    @Transactional
+    public List<DienThoai> getListByNsx(int maNsx){
+    	Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery("from DienThoai where maNsx = "+ maNsx +"");
+			ses.getTransaction().commit();
+			return q.list();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<DienThoai>();
+		} finally {
+			ses.close();
+		}
+    	
+    }
+    
 	@Transactional
-	public boolean add(DienThoai dt, MultipartFile file) {
+	public boolean add(DienThoai dt) {
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			dt.setHinhAnh(file.getBytes());
+			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan())+" VNĐ");
+			double thanhTien = dt.getGiaBan()-dt.getGiaBan()*dt.getGiamGia()/100;
+			dt.setThanhTien(thanhTien);
+			dt.setHienThiThanhTien(formatter.format(thanhTien)+" VNĐ");
 			ses.save(dt);
 			ses.getTransaction().commit();
 			return true;
@@ -61,12 +84,17 @@ public class DienThoaiDAO {
 	}
 	@Transactional
 	public boolean edit(DienThoai dt) {
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
 		if(DienThoaiDAO.getInstance().getById(dt.getMaDt())==null) {
 			return false;
 		}
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.getTransaction().begin();;
+			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan())+" VNĐ");
+			double thanhTien = dt.getGiaBan()-dt.getGiaBan()*dt.getGiamGia()/100;
+			dt.setThanhTien(thanhTien);
+			dt.setHienThiThanhTien(formatter.format(thanhTien)+" VNĐ");
 			ses.update(dt);
 			System.out.println("edit: "+dt.getNhaSanXuat().getMaNsx());
 			ses.getTransaction().commit();

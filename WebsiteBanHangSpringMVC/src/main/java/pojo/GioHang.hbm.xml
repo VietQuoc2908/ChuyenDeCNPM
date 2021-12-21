@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Dec 16, 2021, 3:12:49 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.GioHang" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="GioHang">
+        <id name="maGh" type="int">
+            <column name="maGH"/>
+            <generator class="native"/>
+        </id>
+        <many-to-one class="pojo.KhachHang" embed-xml="true" fetch="select" insert="true" name="khachHang" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="maKH" not-null="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="tongGiaTien" optimistic-lock="true" type="double" unique="false">
+            <column name="tongGiaTien" not-null="true" precision="53" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="hienThiTongTien" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="hienThiTongTien" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="hoaDons" optimistic-lock="true" sort="unsorted" table="HoaDon">
+            <key on-delete="noaction">
+                <column name="maGH" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.HoaDon" embed-xml="true" not-found="exception"/>
+        </set>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chiTietGioHangs" optimistic-lock="true" sort="unsorted" table="ChiTietGioHang">
+            <key on-delete="noaction">
+                <column name="maGH" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.ChiTietGioHang" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

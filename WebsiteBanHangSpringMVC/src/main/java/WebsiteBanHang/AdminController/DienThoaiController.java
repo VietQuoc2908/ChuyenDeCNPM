@@ -76,7 +76,7 @@ public class DienThoaiController {
 		} else
 			try {
 				{
-					DienThoaiDAO.getInstance().add(model,hinhAnh);
+					DienThoaiDAO.getInstance().add(model);
 					System.out.println(model);
 					return new ModelAndView( "redirect:../products");
 					

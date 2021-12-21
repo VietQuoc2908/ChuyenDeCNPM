@@ -60,7 +60,7 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<a href="../products" class="btn btn-secondary">Quay lại</a> 
+				<a href="../manufactores" class="btn btn-secondary">Quay lại</a> 
 				<input type="submit" value="Cập nhật" class="btn btn-success float-right">
 			</div>
 		</div>

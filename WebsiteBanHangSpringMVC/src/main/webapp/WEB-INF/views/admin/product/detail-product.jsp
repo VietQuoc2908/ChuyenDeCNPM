@@ -39,12 +39,22 @@
 					</div>
 					<div class="col-12 col-sm-6">
 						<h3 class="my-3"> ${dienthoai.tenDt} </h3>
+						<p> Hiện còn: ${dienthoai.tonKho} chiếc</p>
 						<p> ${dienthoai.moTa} </p>
-						<p style="color:red"> ${dienthoai.giaBan} VNĐ</p>
-						<p>Giảm giá: ${dienthoai.giamGia} </p>
+						
+						<c:if test="${dienthoai.giamGia > 0}">
+							<p style="text-decoration: line-through;"> ${dienthoai.hienThiGiaBan} VNĐ</p>
+							<p>Giảm giá: ${dienthoai.giamGia} %</p>
+							<p style="color:red"> ${dienthoai.hienThiThanhTien} </p>
+						</c:if>
+						
+						<c:if test="${dienthoai.giamGia == 0}">
+							<p style="color:red"> ${dienthoai.hienThiThanhTien} </p>
+						</c:if>
+						
 						<hr>
 						<h4>Thông tin sản phẩm</h4>
-						<div class="btn-group btn-group-toggle">
+
 						<table class="table table-striped">
 							<tbody>
 								<tr>
@@ -85,10 +95,6 @@
 								</tr>
 							</tbody>
 						</table>
-						</div>
-
-						
-
 						<div class="mt-4">
 								<a class="btn btn-secondary" href="../products">Quay lại</a>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Dec 14, 2021, 3:57:01 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 16, 2021, 3:29:01 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.DienThoai" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="DienThoai">
         <id name="maDt" type="int">
@@ -51,8 +51,8 @@
         <property generated="never" lazy="false" name="pin" optimistic-lock="true" type="string" unique="false">
             <column name="pin"/>
         </property>
-        <property generated="never" lazy="false" name="giaBan" optimistic-lock="true" type="int" unique="false">
-            <column name="giaBan" not-null="true"/>
+        <property generated="never" lazy="false" name="giaBan" optimistic-lock="true" type="double" unique="false">
+            <column name="giaBan" not-null="true" precision="53" scale="0"/>
         </property>
         <property generated="never" lazy="false" name="tonKho" optimistic-lock="true" type="int" unique="false">
             <column name="tonKho" not-null="true"/>
@@ -60,5 +60,20 @@
         <property generated="never" lazy="false" name="giamGia" optimistic-lock="true" type="int" unique="false">
             <column name="giamGia" not-null="true"/>
         </property>
+        <property generated="never" lazy="false" name="thanhTien" optimistic-lock="true" type="java.lang.Double" unique="false">
+            <column name="thanhTien" precision="53" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="hienThiGiaBan" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="hienThiGiaBan" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="hienThiThanhTien" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="hienThiThanhTien" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chiTietGioHangs" optimistic-lock="true" sort="unsorted" table="ChiTietGioHang">
+            <key on-delete="noaction">
+                <column name="maDT" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.ChiTietGioHang" embed-xml="true" not-found="exception"/>
+        </set>
     </class>
 </hibernate-mapping>

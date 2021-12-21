@@ -132,7 +132,7 @@ public class NhaSanXuatController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/delete-manufactor/{maDt}",method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/delete-manufactor/{maNsx}",method = RequestMethod.POST, produces="application/json")
 	@ResponseBody
 	public Map<String, String> DeleteProduct(@PathVariable("maNsx") int maNsx,ModelMap model) {
 		HashMap<String, String> map = new HashMap<String, String>();

@@ -69,7 +69,7 @@
 										<td style="white-space: break-spaces">${item.tenDt} </td>
 										<td>${item.nhaSanXuat.tenNsx}</td>
 										<td>${item.tonKho}</td>
-										<td>${item.giaBan}</td>
+										<td>${item.hienThiThanhTien}</td>
 										<td>${item.danhMuc.tenDm}</td>
 										<td class="project-actions text-right"><a
 											class="btn btn-primary btn-sm" href="./products/detail-product?maDt=${item.maDt}"> <i
