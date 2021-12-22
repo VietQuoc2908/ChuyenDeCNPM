@@ -1,5 +1,5 @@
 package pojo;
-// Generated Dec 16, 2021, 3:12:49 PM by Hibernate Tools 5.5.7.Final
+// Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +13,8 @@ public class GioHang implements java.io.Serializable {
 	private KhachHang khachHang;
 	private double tongGiaTien;
 	private String hienThiTongTien;
-	private Set hoaDons = new HashSet(0);
 	private Set chiTietGioHangs = new HashSet(0);
+	private Set hoaDons = new HashSet(0);
 
 	public GioHang() {
 	}
@@ -26,14 +26,14 @@ public class GioHang implements java.io.Serializable {
 		this.hienThiTongTien = hienThiTongTien;
 	}
 
-	public GioHang(int maGh, KhachHang khachHang, double tongGiaTien, String hienThiTongTien, Set hoaDons,
-			Set chiTietGioHangs) {
+	public GioHang(int maGh, KhachHang khachHang, double tongGiaTien, String hienThiTongTien, Set chiTietGioHangs,
+			Set hoaDons) {
 		this.maGh = maGh;
 		this.khachHang = khachHang;
 		this.tongGiaTien = tongGiaTien;
 		this.hienThiTongTien = hienThiTongTien;
-		this.hoaDons = hoaDons;
 		this.chiTietGioHangs = chiTietGioHangs;
+		this.hoaDons = hoaDons;
 	}
 
 	public int getMaGh() {
@@ -68,20 +68,20 @@ public class GioHang implements java.io.Serializable {
 		this.hienThiTongTien = hienThiTongTien;
 	}
 
-	public Set getHoaDons() {
-		return this.hoaDons;
-	}
-
-	public void setHoaDons(Set hoaDons) {
-		this.hoaDons = hoaDons;
-	}
-
 	public Set getChiTietGioHangs() {
 		return this.chiTietGioHangs;
 	}
 
 	public void setChiTietGioHangs(Set chiTietGioHangs) {
 		this.chiTietGioHangs = chiTietGioHangs;
+	}
+
+	public Set getHoaDons() {
+		return this.hoaDons;
+	}
+
+	public void setHoaDons(Set hoaDons) {
+		this.hoaDons = hoaDons;
 	}
 
 }

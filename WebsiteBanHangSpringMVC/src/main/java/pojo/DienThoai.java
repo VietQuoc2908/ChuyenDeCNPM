@@ -1,5 +1,5 @@
 package pojo;
-// Generated Dec 16, 2021, 3:29:01 PM by Hibernate Tools 5.5.7.Final
+// Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -29,7 +29,7 @@ public class DienThoai implements java.io.Serializable {
 	private double giaBan;
 	private int tonKho;
 	private int giamGia;
-	private Double thanhTien;
+	private double thanhTien;
 	private String hienThiGiaBan;
 	private String hienThiThanhTien;
 	private Set chiTietGioHangs = new HashSet(0);
@@ -38,7 +38,7 @@ public class DienThoai implements java.io.Serializable {
 	}
 
 	public DienThoai(int maDt, DanhMuc danhMuc, NhaSanXuat nhaSanXuat, String tenDt, double giaBan, int tonKho,
-			int giamGia, String hienThiGiaBan, String hienThiThanhTien) {
+			int giamGia, double thanhTien, String hienThiGiaBan, String hienThiThanhTien) {
 		this.maDt = maDt;
 		this.danhMuc = danhMuc;
 		this.nhaSanXuat = nhaSanXuat;
@@ -46,6 +46,7 @@ public class DienThoai implements java.io.Serializable {
 		this.giaBan = giaBan;
 		this.tonKho = tonKho;
 		this.giamGia = giamGia;
+		this.thanhTien = thanhTien;
 		this.hienThiGiaBan = hienThiGiaBan;
 		this.hienThiThanhTien = hienThiThanhTien;
 	}
@@ -53,7 +54,7 @@ public class DienThoai implements java.io.Serializable {
 	public DienThoai(int maDt, DanhMuc danhMuc, NhaSanXuat nhaSanXuat, String tenDt, byte[] hinhAnh,
 			String base64image, String moTa, String manHinh, String heDieuHanh,
 			String cameraTruoc, String cameraSau, String chip, String ram, String rom,
-			String sim, String pin, double giaBan, int tonKho, int giamGia, Double thanhTien,
+			String sim, String pin, double giaBan, int tonKho, int giamGia, double thanhTien,
 			String hienThiGiaBan, String hienThiThanhTien, Set chiTietGioHangs) {
 		this.maDt = maDt;
 		this.danhMuc = danhMuc;
@@ -232,11 +233,11 @@ public class DienThoai implements java.io.Serializable {
 		this.giamGia = giamGia;
 	}
 
-	public Double getThanhTien() {
+	public double getThanhTien() {
 		return this.thanhTien;
 	}
 
-	public void setThanhTien(Double thanhTien) {
+	public void setThanhTien(double thanhTien) {
 		this.thanhTien = thanhTien;
 	}
 

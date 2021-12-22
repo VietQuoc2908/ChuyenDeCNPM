@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Dec 16, 2021, 3:12:49 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.KhachHang" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="KhachHang">
         <id name="maKh" type="int">
             <column name="maKH"/>
             <generator class="native"/>
         </id>
-        <property generated="never" lazy="false" name="taikhoan" optimistic-lock="true" type="string" unique="false">
+        <many-to-one class="pojo.TaiKhoan" embed-xml="true" fetch="select" insert="true" name="taiKhoan" not-found="exception" optimistic-lock="true" unique="false" update="true">
             <column length="50" name="taikhoan" not-null="true"/>
-        </property>
-        <property generated="never" lazy="false" name="matkhau" optimistic-lock="true" type="string" unique="false">
-            <column length="50" name="matkhau" not-null="true"/>
-        </property>
+        </many-to-one>
         <property generated="never" lazy="false" name="tenKh" optimistic-lock="true" type="string" unique="false">
             <column name="tenKH" not-null="true"/>
         </property>

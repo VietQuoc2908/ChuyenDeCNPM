@@ -9,4 +9,6 @@
   <table-filter match-catalog="DienThoaiSpringMVC" match-schema="dbo" match-name="HoaDon"/>
   <table-filter match-catalog="DienThoaiSpringMVC" match-schema="dbo" match-name="KhachHang"/>
   <table-filter match-catalog="DienThoaiSpringMVC" match-schema="dbo" match-name="NhaSanXuat"/>
+  <table-filter match-catalog="DienThoaiSpringMVC" match-schema="dbo" match-name="PhanQuyen"/>
+  <table-filter match-catalog="DienThoaiSpringMVC" match-schema="dbo" match-name="TaiKhoan"/>
 </hibernate-reverse-engineering>

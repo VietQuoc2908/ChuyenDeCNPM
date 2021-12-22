@@ -1,5 +1,5 @@
 package pojo;
-// Generated Dec 16, 2021, 3:12:49 PM by Hibernate Tools 5.5.7.Final
+// Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,8 +11,7 @@ import java.util.Set;
 public class KhachHang implements java.io.Serializable {
 
 	private int maKh;
-	private String taikhoan;
-	private String matkhau;
+	private TaiKhoan taiKhoan;
 	private String tenKh;
 	private String sdt;
 	private String diachi;
@@ -21,20 +20,17 @@ public class KhachHang implements java.io.Serializable {
 	public KhachHang() {
 	}
 
-	public KhachHang(int maKh, String taikhoan, String matkhau, String tenKh, String sdt, String diachi) {
+	public KhachHang(int maKh, TaiKhoan taiKhoan, String tenKh, String sdt, String diachi) {
 		this.maKh = maKh;
-		this.taikhoan = taikhoan;
-		this.matkhau = matkhau;
+		this.taiKhoan = taiKhoan;
 		this.tenKh = tenKh;
 		this.sdt = sdt;
 		this.diachi = diachi;
 	}
 
-	public KhachHang(int maKh, String taikhoan, String matkhau, String tenKh, String sdt, String diachi,
-			Set gioHangs) {
+	public KhachHang(int maKh, TaiKhoan taiKhoan, String tenKh, String sdt, String diachi, Set gioHangs) {
 		this.maKh = maKh;
-		this.taikhoan = taikhoan;
-		this.matkhau = matkhau;
+		this.taiKhoan = taiKhoan;
 		this.tenKh = tenKh;
 		this.sdt = sdt;
 		this.diachi = diachi;
@@ -49,20 +45,12 @@ public class KhachHang implements java.io.Serializable {
 		this.maKh = maKh;
 	}
 
-	public String getTaikhoan() {
-		return this.taikhoan;
+	public TaiKhoan getTaiKhoan() {
+		return this.taiKhoan;
 	}
 
-	public void setTaikhoan(String taikhoan) {
-		this.taikhoan = taikhoan;
-	}
-
-	public String getMatkhau() {
-		return this.matkhau;
-	}
-
-	public void setMatkhau(String matkhau) {
-		this.matkhau = matkhau;
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan = taiKhoan;
 	}
 
 	public String getTenKh() {
