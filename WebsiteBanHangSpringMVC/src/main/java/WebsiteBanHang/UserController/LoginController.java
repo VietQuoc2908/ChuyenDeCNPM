@@ -70,8 +70,11 @@ public class LoginController {
 		if(err.hasErrors()) {
 			System.out.println("Lỗi thông tin");
 		}else {
-			TaiKhoanDAO.getInstance().isUser(model.getTaikhoan(), model.getMatkhau());
-			return new ModelAndView( "redirect:./");
+			if(TaiKhoanDAO.getInstance().checkLogin(model.getTaikhoan(), model.getMatkhau())) {
+				return new ModelAndView( "redirect:./");
+			}else {
+				mv.addObject("error","Sai tên đăng nhập hoặc mật khẩu");
+			}
 		}
 		
 		return mv;

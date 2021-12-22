@@ -35,6 +35,7 @@
 
 				<input type="submit" value="Đăng ký"
 					class="btn btn-success float-right">
+				<p style="line-height: 3.2; display: inline; float: right">Đã có tài khoản?<a href="./login"> Đăng nhập</a></p>
 			</f:form>
 		</div>
 	</div>

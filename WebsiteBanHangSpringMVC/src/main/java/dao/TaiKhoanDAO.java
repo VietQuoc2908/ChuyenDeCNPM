@@ -1,7 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -39,16 +37,14 @@ public class TaiKhoanDAO {
 		}
     }
     
-    public TaiKhoan getByUsername(String taikhoan) {
+    public boolean checkLogin(String taikhoan, String matkhau) {
     	Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			List<TaiKhoan> users = new ArrayList<TaiKhoan>();
-			users = ses.createQuery("from TaiKhoan t where t.taikhoan=:taikhoan").setParameter("taikhoan", taikhoan).list();
-			System.out.println(users);
-			if(users.size()>0) {
-				System.out.println(users);
-				return users.get(0);
+			Query q = ses.createQuery("from TaiKhoan n where n.taikhoan = '"+taikhoan+"' and n.matkhau = '"+matkhau+"'");
+			if(!q.getResultList().isEmpty()) {
+				ses.getTransaction().commit();
+				return true;
 			}
 			ses.getTransaction().commit();
 		} catch (Exception e) {
@@ -57,14 +53,7 @@ public class TaiKhoanDAO {
 		} finally {
 			ses.close();
 		}
-		return null;
+		return false;
     }
     
-    public boolean isUser(String taikhoan, String matkhau) {
-    	TaiKhoan user = TaiKhoanDAO.getInstance().getByUsername(taikhoan);
-        if(user != null && user.getMatkhau().equals(matkhau)) {
-            return true;
-        }
-        return false;
-    }
 }
