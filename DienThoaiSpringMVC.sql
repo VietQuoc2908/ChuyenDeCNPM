@@ -112,8 +112,5 @@ Insert into DanhMuc values(N'Mới')
 Insert into DanhMuc values(N'Giảm giá')
 Insert into DanhMuc values(N'Chưa có')
 
-Insert into NhaSanXuat(tenNSX) values(N'SamSung')
-Insert into NhaSanXuat(tenNSX) values(N'Oppo')
-
 Insert into PhanQuyen values('ad')
 Insert into PhanQuyen values('kh')

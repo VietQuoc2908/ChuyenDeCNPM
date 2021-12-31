@@ -90,7 +90,7 @@ public class DienThoaiDAO {
 		}
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ses.getTransaction().begin();;
+			ses.getTransaction().begin();
 			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan())+" VNĐ");
 			double thanhTien = dt.getGiaBan()-dt.getGiaBan()*dt.getGiamGia()/100;
 			dt.setThanhTien(thanhTien);

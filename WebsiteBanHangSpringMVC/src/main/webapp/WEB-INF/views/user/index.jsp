@@ -62,7 +62,8 @@
 								<div class="product-f-image">
 									<img style="height:180px; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt="">
 									<div class="product-hover">
-										<a href="#" class="add-to-cart-link"><i
+
+										<a href="#" class="add-to-cart-link btnAddCart" data-id="${item.maDt}" data-name="<%=session.getAttribute("taikhoan") %>"><i
 											class="fa fa-shopping-cart"></i> Add to cart</a> <a
 											href="./single-product?maDt=${item.maDt}" class="view-details-link"><i
 											class="fa fa-link"></i> Xem chi tiết</a>

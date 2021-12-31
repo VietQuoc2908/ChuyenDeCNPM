@@ -10,12 +10,18 @@
 			<div class="col-md-8">
 				<div class="user-menu">
 					<ul>
-						<li><a href="#"><i class="fa fa-user"></i> Tài khoản của tôi</a></li>
+						<%
+						if (session.getAttribute("taikhoan") == null || session.getAttribute("taikhoan").equals("")){
+						%>
+						<li><a href="./login"><i class="fa fa-user"></i> Đăng nhập</a></li>
+						<%}else{ %>
+						<li><a href="./"><i class="fa fa-user"></i> Xin chào <%=session.getAttribute("taikhoan") %></a></li>
+						<%} %>
 						<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
 						<li><a href="./cart"><i class="fa fa-user"></i> Giỏ hàng</a></li>
 						<li><a href="./checkout"><i class="fa fa-user"></i>
 								Checkout</a></li>
-						<li><a href="./login"><i class="fa fa-user"></i> Đăng nhập</a></li>
+						
 					</ul>
 				</div>
 			</div>
@@ -32,17 +38,12 @@
 								<li><a href="#">INR</a></li>
 								<li><a href="#">GBP</a></li>
 							</ul></li>
-
-						<li class="dropdown dropdown-small"><a data-toggle="dropdown"
-							data-hover="dropdown" class="dropdown-toggle" href="#"><span
-								class="key">language :</span><span class="value">English
-							</span><b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">English</a></li>
-								<li><a href="#">French</a></li>
-								<li><a href="#">German</a></li>
-							</ul>
-						</li>
+						<%
+						if (session.getAttribute("taikhoan") == null || session.getAttribute("taikhoan").equals("")){
+						%>
+						<%}else{ %>
+						<li><a href="./logout">Đăng xuất</a></li>
+						<%} %>
 					</ul>
 				</div>
 			</div>
@@ -61,9 +62,14 @@
                 </div>
                 
                 <div class="col-sm-6">
+                	<%
+					if (session.getAttribute("taikhoan") == null || session.getAttribute("taikhoan").equals("")){
+					%>
+					<%}else{ %>
                     <div class="shopping-item">
-                        <a href="cart">Cart - <span class="cart-amunt">$100</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="cart">Giỏ hàng - <span id="giohang" class="cart-amunt">${gioHang.hienThiTongTien }</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                     </div>
+                    <%} %>
                 </div>
             </div>
         </div>

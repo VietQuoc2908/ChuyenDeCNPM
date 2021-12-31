@@ -1,9 +1,14 @@
 package dao;
 
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import java.text.DecimalFormat;
 
+import pojo.DienThoai;
+import pojo.GioHang;
+import pojo.KhachHang;
 import pojo.PhanQuyen;
 import pojo.TaiKhoan;
 import utils.HibernateUtil;
@@ -22,10 +27,25 @@ public class TaiKhoanDAO {
 
     public boolean createAccount(TaiKhoan tk) {
     	Session ses = HibernateUtil.getSessionFactory().openSession();
+    	DecimalFormat formatter = new DecimalFormat("###,###,###");
 		try {
 			ses.beginTransaction();
+			//tạo taikhoan
 			tk.setPhanQuyen(PhanQuyenDAO.getInstance().roleKH(2));
 			ses.save(tk);
+			//tạo khachHang
+			KhachHang kh = new KhachHang();
+			kh.setTenKh("");
+			kh.setSdt("");
+			kh.setDiachi("");
+			kh.setTaiKhoan(tk);
+			ses.save(kh);
+			//tạo giohang
+			GioHang gh = new GioHang();
+			gh.setKhachHang(kh);
+			gh.setTongGiaTien(0);
+			gh.setHienThiTongTien(formatter.format(0)+" VNĐ");
+			ses.save(gh);
 			ses.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
@@ -55,5 +75,7 @@ public class TaiKhoanDAO {
 		}
 		return false;
     }
+    
+    
     
 }

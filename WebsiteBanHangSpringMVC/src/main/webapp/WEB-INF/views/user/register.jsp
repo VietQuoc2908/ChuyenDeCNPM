@@ -32,7 +32,9 @@
 						<p class="text-danger">${error}</p>
 					</c:if>
 				</div>
-
+				<c:if test="${not empty success}">
+						<p class="text-success">${success}</p>
+				</c:if>
 				<input type="submit" value="Đăng ký"
 					class="btn btn-success float-right">
 				<p style="line-height: 3.2; display: inline; float: right">Đã có tài khoản?<a href="./login"> Đăng nhập</a></p>

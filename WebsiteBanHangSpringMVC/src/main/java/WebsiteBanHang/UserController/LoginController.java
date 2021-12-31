@@ -1,5 +1,6 @@
 package WebsiteBanHang.UserController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -50,9 +51,10 @@ public class LoginController {
 		if(err.hasErrors()) {
 			System.out.println("Lỗi thông tin");
 		}else {
+			mv.addObject("success","Đăng ký thành công");
 			TaiKhoanDAO.getInstance().createAccount(model);
+			return mv;
 		}
-		
 		return new ModelAndView( "redirect:./register");
 	}
 	
@@ -63,7 +65,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public ModelAndView Login(@Valid @ModelAttribute("nguoidung") TaiKhoan model, Errors err) 
+	public ModelAndView Login(@Valid @ModelAttribute("nguoidung") TaiKhoan model, Errors err, HttpSession session) 
 	{
 		ModelAndView mv = new ModelAndView("/user/login");
 		mv.addObject("nguoidung",model);
@@ -71,6 +73,7 @@ public class LoginController {
 			System.out.println("Lỗi thông tin");
 		}else {
 			if(TaiKhoanDAO.getInstance().checkLogin(model.getTaikhoan(), model.getMatkhau())) {
+				session.setAttribute("taikhoan", model.getTaikhoan());
 				return new ModelAndView( "redirect:./");
 			}else {
 				mv.addObject("error","Sai tên đăng nhập hoặc mật khẩu");
@@ -80,4 +83,9 @@ public class LoginController {
 		return mv;
 	}
 
+	@RequestMapping(value="/logout")
+	public String Logout(HttpSession session ) {
+	    session.invalidate();
+	    return "redirect:/";
+	} 
 }
