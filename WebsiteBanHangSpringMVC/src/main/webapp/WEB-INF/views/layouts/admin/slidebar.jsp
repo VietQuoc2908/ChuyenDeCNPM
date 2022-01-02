@@ -36,7 +36,7 @@
 					class="nav-link"> <i class="nav-icon fas fa-columns"></i>
 						<p>Khách hàng</p>
 				</a></li>
-				<li class="nav-item"><a href="../../../WebsiteBanHangSpringMVC/admin/manufactores"
+				<li class="nav-item"><a href="../../../WebsiteBanHangSpringMVC/admin/orders"
 					class="nav-link"> <i class="nav-icon fas fa-columns"></i>
 						<p>Đơn hàng</p>
 				</a></li>

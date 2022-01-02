@@ -46,6 +46,22 @@ public class HoaDonDAO {
 		}
 	}
 	
+	public List<HoaDon> getList() {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery("from HoaDon");
+			ses.getTransaction().commit();
+			return q.list();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<HoaDon>();
+		} finally {
+			ses.close();
+		}
+	}
+	
 	public HoaDon getLastId() {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
