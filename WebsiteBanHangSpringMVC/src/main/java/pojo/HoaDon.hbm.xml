@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 1, 2022, 12:34:54 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.HoaDon" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="HoaDon">
         <id name="maHd" type="int">
             <column name="maHD"/>
             <generator class="native"/>
         </id>
-        <many-to-one class="pojo.GioHang" embed-xml="true" fetch="select" insert="true" name="gioHang" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="maGH" not-null="true"/>
+        <many-to-one class="pojo.KhachHang" embed-xml="true" fetch="select" insert="true" name="khachHang" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="maKH" not-null="true"/>
         </many-to-one>
         <property generated="never" lazy="false" name="status" optimistic-lock="true" type="java.lang.Integer" unique="false">
             <column name="status"/>
         </property>
+        <property generated="never" lazy="false" name="tongTien" optimistic-lock="true" type="double" unique="false">
+            <column name="tongTien" not-null="true" precision="53" scale="0"/>
+        </property>
+        <property generated="never" lazy="false" name="hienThiTongTien" optimistic-lock="true" type="string" unique="false">
+            <column length="50" name="hienThiTongTien" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chiTietHoaDons" optimistic-lock="true" sort="unsorted" table="ChiTietHoaDon">
+            <key on-delete="noaction">
+                <column name="maHD" not-null="true"/>
+            </key>
+            <one-to-many class="pojo.ChiTietHoaDon" embed-xml="true" not-found="exception"/>
+        </set>
     </class>
 </hibernate-mapping>

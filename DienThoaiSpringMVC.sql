@@ -103,10 +103,27 @@ Go
 Create Table HoaDon
 (
 	maHD int IDENTITY(1,1) PRIMARY KEY,
-	maGH int not null,
-	status int default 0, --0:đợi xác nhận, 1:xác nhận, 2:đang giao hàng, 3:hoàn tất
-	FOREIGN KEY (maGH) REFERENCES GioHang(maGH)
+	maKH int not null,
+	status int default 0, --0:chờ xác nhận, 1:đang giao hàng, 2:đã giao, 3: đã huỷ
+	tongTien float not null,
+	hienThiTongTien varchar(50) not null,
+	FOREIGN KEY (maKH) REFERENCES KhachHang(maKH),
 )
+Go
+
+Create Table ChiTietHoaDon
+(
+	maCTHD int IDENTITY(1,1) PRIMARY KEY,
+	maHD int not null,
+	maDT int not null,
+	soLuong int not null,
+	donGia float not null,
+	tongTien float not null,
+	hienThiTongTien varchar(50) not null,
+	FOREIGN KEY (maHD) REFERENCES HoaDon(maHD),
+	FOREIGN KEY (maDT) REFERENCES DienThoai(maDT)
+)
+Go
 
 Insert into DanhMuc values(N'Mới')
 Insert into DanhMuc values(N'Giảm giá')

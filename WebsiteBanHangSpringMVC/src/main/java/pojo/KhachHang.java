@@ -1,5 +1,5 @@
 package pojo;
-// Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final
+// Generated Jan 1, 2022, 12:34:54 PM by Hibernate Tools 5.5.7.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -15,6 +15,7 @@ public class KhachHang implements java.io.Serializable {
 	private String tenKh;
 	private String sdt;
 	private String diachi;
+	private Set hoaDons = new HashSet(0);
 	private Set gioHangs = new HashSet(0);
 
 	public KhachHang() {
@@ -28,12 +29,14 @@ public class KhachHang implements java.io.Serializable {
 		this.diachi = diachi;
 	}
 
-	public KhachHang(int maKh, TaiKhoan taiKhoan, String tenKh, String sdt, String diachi, Set gioHangs) {
+	public KhachHang(int maKh, TaiKhoan taiKhoan, String tenKh, String sdt, String diachi, Set hoaDons,
+			Set gioHangs) {
 		this.maKh = maKh;
 		this.taiKhoan = taiKhoan;
 		this.tenKh = tenKh;
 		this.sdt = sdt;
 		this.diachi = diachi;
+		this.hoaDons = hoaDons;
 		this.gioHangs = gioHangs;
 	}
 
@@ -75,6 +78,14 @@ public class KhachHang implements java.io.Serializable {
 
 	public void setDiachi(String diachi) {
 		this.diachi = diachi;
+	}
+
+	public Set getHoaDons() {
+		return this.hoaDons;
+	}
+
+	public void setHoaDons(Set hoaDons) {
+		this.hoaDons = hoaDons;
 	}
 
 	public Set getGioHangs() {

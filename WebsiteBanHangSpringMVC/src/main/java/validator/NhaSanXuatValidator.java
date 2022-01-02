@@ -15,9 +15,9 @@ public class NhaSanXuatValidator implements Validator {
 
 	public void validate(Object target, Errors errors) {
 		// TODO Auto-generated method stub
-		NhaSanXuat nsx = (NhaSanXuat)target;
-		if(nsx.getTenNsx()==null || nsx.getTenNsx().isEmpty()) {
-			errors.rejectValue("tenDt", "dt.tenDt","Tên điện thoại không được để trống");
+		NhaSanXuat nsx = (NhaSanXuat) target;
+		if (nsx.getTenNsx() == null || nsx.getTenNsx().isEmpty()) {
+			errors.rejectValue("tenDt", "dt.tenDt", "Tên điện thoại không được để trống");
 		}
 	}
 

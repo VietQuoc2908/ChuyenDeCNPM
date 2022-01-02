@@ -14,14 +14,13 @@ public class TaiKhoanValidator implements Validator {
 	}
 
 	public void validate(Object target, Errors errors) {
-		TaiKhoan tk = (TaiKhoan)target;
-		if(tk.getTaikhoan().isEmpty() || tk.getTaikhoan()==null) {
-			errors.rejectValue("taikhoan", "tk.taikhoan","Tên đăng nhập không được để trống");
-		}else if(tk.getMatkhau().isEmpty() || tk.getMatkhau()==null){
-			errors.rejectValue("matkhau", "tk.matkhau","Mật khẩu không được để trống");
+		TaiKhoan tk = (TaiKhoan) target;
+		if (tk.getTaikhoan().isEmpty() || tk.getTaikhoan() == null) {
+			errors.rejectValue("taikhoan", "tk.taikhoan", "Tên đăng nhập không được để trống");
+		} else if (tk.getMatkhau().isEmpty() || tk.getMatkhau() == null) {
+			errors.rejectValue("matkhau", "tk.matkhau", "Mật khẩu không được để trống");
 		}
-		
-	}
 
+	}
 
 }

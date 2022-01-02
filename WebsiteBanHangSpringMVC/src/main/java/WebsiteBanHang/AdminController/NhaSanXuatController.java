@@ -32,51 +32,51 @@ import validator.NhaSanXuatValidator;
 public class NhaSanXuatController {
 
 	@InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.addValidators(new NhaSanXuatValidator());
-        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-    }
-	
-	@RequestMapping(value="")
+	public void initBinder(WebDataBinder binder) {
+		binder.addValidators(new NhaSanXuatValidator());
+		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	}
+
+	@RequestMapping(value = "")
 	public String Index(ModelMap model) throws Exception {
-		model.addAttribute("list",NhaSanXuatDAO.getInstance().getList());
+		model.addAttribute("list", NhaSanXuatDAO.getInstance().getList());
 		return "admin/manufactor/manufactores";
 	}
-	
-	@RequestMapping(value="/add-manufactor",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/add-manufactor", method = RequestMethod.GET)
 	public String AddProduct(ModelMap model) {
-		model.addAttribute("nhasanxuat",new NhaSanXuat());
+		model.addAttribute("nhasanxuat", new NhaSanXuat());
 		return "admin/manufactor/add-manufactor";
 	}
 
-	@RequestMapping(value="/add-manufactor",method = RequestMethod.POST)
-	public ModelAndView AddProduct(@Valid @ModelAttribute("nhasanxuat") NhaSanXuat model, 
-			Errors err, @RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException{
+	@RequestMapping(value = "/add-manufactor", method = RequestMethod.POST)
+	public ModelAndView AddProduct(@Valid @ModelAttribute("nhasanxuat") NhaSanXuat model, Errors err,
+			@RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException {
 		ModelAndView mv = new ModelAndView("/admin/manufactor/add-manufactor");
 		System.out.println(model);
-		mv.addObject("nhasanxuat",model);
+		mv.addObject("nhasanxuat", model);
 
-		if(hinhAnh==null || hinhAnh.isEmpty() || hinhAnh.toString().isEmpty()) {
-			mv.addObject("message","Vui lòng chọn ảnh");
-		}else { 
+		if (hinhAnh == null || hinhAnh.isEmpty() || hinhAnh.toString().isEmpty()) {
+			mv.addObject("message", "Vui lòng chọn ảnh");
+		} else {
 			try {
-				//lưu Base64image
+				// lưu Base64image
 				byte[] encode = java.util.Base64.getEncoder().encode(hinhAnh.getBytes());
 				model.setBase64image(new String(encode, "UTF-8"));
-			}catch(Exception e) { 
-				mv.addObject("message","Lỗi lưu file"); 
-			} 
+			} catch (Exception e) {
+				mv.addObject("message", "Lỗi lưu file");
+			}
 		}
 
-		if(err.hasErrors()) {
+		if (err.hasErrors()) {
 			System.out.println("Lỗi thông tin");
 		} else
 			try {
 				{
-					NhaSanXuatDAO.getInstance().add(model,hinhAnh);
+					NhaSanXuatDAO.getInstance().add(model, hinhAnh);
 					System.out.println(model);
-					return new ModelAndView( "redirect:../manufactores");
-					
+					return new ModelAndView("redirect:../manufactores");
+
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -84,61 +84,61 @@ public class NhaSanXuatController {
 			}
 		return mv;
 	}
-	
-	@RequestMapping(value="/edit-manufactor",method = RequestMethod.GET)
-	public String EditProduct(@RequestParam("maNsx") int maNsx,ModelMap model) {
+
+	@RequestMapping(value = "/edit-manufactor", method = RequestMethod.GET)
+	public String EditProduct(@RequestParam("maNsx") int maNsx, ModelMap model) {
 		NhaSanXuat nsx = NhaSanXuatDAO.getInstance().getById(maNsx);
-		model.addAttribute("nhasanxuat",nsx);
+		model.addAttribute("nhasanxuat", nsx);
 		return "admin/manufactor/edit-manufactor";
 	}
-	
-	@RequestMapping(value="/edit-manufactor",method = RequestMethod.POST)
-	public ModelAndView EditProduct(@Valid @ModelAttribute("nhasanxuat") NhaSanXuat model,Errors err, @RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException{
+
+	@RequestMapping(value = "/edit-manufactor", method = RequestMethod.POST)
+	public ModelAndView EditProduct(@Valid @ModelAttribute("nhasanxuat") NhaSanXuat model, Errors err,
+			@RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException {
 		ModelAndView mv = new ModelAndView("/admin/manufactor/edit-manufactor");
-		mv.addObject("nhasanxuat",model);
-		
+		mv.addObject("nhasanxuat", model);
+
 		// nếu không có ảnh thì lưu lại ảnh cũ
-		if(hinhAnh==null || hinhAnh.isEmpty()) {
+		if (hinhAnh == null || hinhAnh.isEmpty()) {
 			NhaSanXuat nsx = NhaSanXuatDAO.getInstance().getById(model.getMaNsx());
 			model.setHinhAnh(nsx.getHinhAnh());
 			byte[] encode = java.util.Base64.getEncoder().encode(nsx.getHinhAnh());
 			model.setBase64image(new String(encode, "UTF-8"));
-		}else { 
+		} else {
 			try {
-				//lưu Base64image
+				// lưu Base64image
 				model.setHinhAnh(hinhAnh.getBytes());
 				byte[] encode = java.util.Base64.getEncoder().encode(hinhAnh.getBytes());
 				model.setBase64image(new String(encode, "UTF-8"));
-			}catch(Exception e) { 
-				mv.addObject("message","Lỗi lưu file"); 
-			} 
+			} catch (Exception e) {
+				mv.addObject("message", "Lỗi lưu file");
+			}
 		}
-		
-		if(err.hasErrors()) {
+
+		if (err.hasErrors()) {
 			System.out.println("Lỗi thông tin");
 		} else
 			try {
-				
-					System.out.println(model);
-					
-					NhaSanXuatDAO.getInstance().edit(model);
-					return new ModelAndView( "redirect:../manufactores");
-					
-				
+
+				System.out.println(model);
+
+				NhaSanXuatDAO.getInstance().edit(model);
+				return new ModelAndView("redirect:../manufactores");
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		return mv;
 	}
-	
-	@RequestMapping(value="/delete-manufactor/{maNsx}",method = RequestMethod.POST, produces="application/json")
+
+	@RequestMapping(value = "/delete-manufactor/{maNsx}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public Map<String, String> DeleteProduct(@PathVariable("maNsx") int maNsx,ModelMap model) {
+	public Map<String, String> DeleteProduct(@PathVariable("maNsx") int maNsx, ModelMap model) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		NhaSanXuat nsx = NhaSanXuatDAO.getInstance().getById(maNsx);
-		
-		if(nsx!=null) {
+
+		if (nsx != null) {
 			NhaSanXuatDAO.getInstance().delete(maNsx);
 			map.put("isvalid", "true");
 			return map;

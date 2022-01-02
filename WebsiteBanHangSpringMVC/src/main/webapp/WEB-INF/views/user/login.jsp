@@ -3,12 +3,23 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 
+<div class="product-big-title-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="product-bit-title text-center">
+					<h2>Đăng nhập</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-6"></div>
 
 		<div class="col-md-6">
-			<h2>Đăng nhập</h2>
 			<f:form modelAttribute="nguoidung" method="post">
 
 				<div class="form-group">

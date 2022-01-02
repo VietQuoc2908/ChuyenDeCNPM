@@ -17,19 +17,20 @@ import pojo.NhaSanXuat;
 import utils.HibernateUtil;
 
 public class DienThoaiDAO {
-	
-	private static DienThoaiDAO instance;
-    private DienThoaiDAO(){}
 
-    public static DienThoaiDAO getInstance()
-    {
-        if (instance == null)
-            instance = new DienThoaiDAO();
-        return instance;
-    }
-    @Transactional
+	private static DienThoaiDAO instance;
+
+	private DienThoaiDAO() {
+	}
+
+	public static DienThoaiDAO getInstance() {
+		if (instance == null)
+			instance = new DienThoaiDAO();
+		return instance;
+	}
+
 	public List<DienThoai> getList() {
-    	Session ses = HibernateUtil.getSessionFactory().openSession();
+		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
 			Query q = ses.createQuery("from DienThoai");
@@ -43,12 +44,14 @@ public class DienThoaiDAO {
 			ses.close();
 		}
 	}
-    @Transactional
-    public List<DienThoai> getListByNsx(int maNsx){
-    	Session ses = HibernateUtil.getSessionFactory().openSession();
+	
+	public List<DienThoai> getListByDm(String tenDm) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			Query q = ses.createQuery("from DienThoai where maNsx = "+ maNsx +"");
+			Query q = ses.createQuery("from DienThoai where tenDm like :tenDm order by maDt desc");
+			q.setParameter("tenDm", "%" + tenDm + "%");
+			q.setMaxResults(6);
 			ses.getTransaction().commit();
 			return q.list();
 		} catch (Exception e) {
@@ -58,19 +61,70 @@ public class DienThoaiDAO {
 		} finally {
 			ses.close();
 		}
-    	
-    }
-    
+	}
+
+	@Transactional
+	public List<DienThoai> getListByNsx(int maNsx) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery("from DienThoai where maNsx = " + maNsx + "");
+			ses.getTransaction().commit();
+			return q.list();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<DienThoai>();
+		} finally {
+			ses.close();
+		}
+
+	}
+	
+	public List<DienThoai> getListByText(String txtSearch) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery("from DienThoai where tenDt like :txtSearch");
+			q.setParameter("txtSearch", "%" + txtSearch + "%");
+			ses.getTransaction().commit();
+			return q.list();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<DienThoai>();
+		} finally {
+			ses.close();
+		}
+	}
+	
+	public List<DienThoai> getDienThoaiByPage(int pageid, int total){
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			List<DienThoai> dt = ses.createQuery("from DienThoai").setFirstResult(pageid).setMaxResults(total).list();
+			
+			ses.getTransaction().commit();
+			return dt;
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<DienThoai>();
+		} finally {
+			ses.close();
+		}
+	}
+
 	@Transactional
 	public boolean add(DienThoai dt) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan())+" VNĐ");
-			double thanhTien = dt.getGiaBan()-dt.getGiaBan()*dt.getGiamGia()/100;
+			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan()) + " VNĐ");
+			double thanhTien = dt.getGiaBan() - dt.getGiaBan() * dt.getGiamGia() / 100;
 			dt.setThanhTien(thanhTien);
-			dt.setHienThiThanhTien(formatter.format(thanhTien)+" VNĐ");
+			dt.setHienThiThanhTien(formatter.format(thanhTien) + " VNĐ");
 			ses.save(dt);
 			ses.getTransaction().commit();
 			return true;
@@ -82,39 +136,41 @@ public class DienThoaiDAO {
 			ses.close();
 		}
 	}
+
 	@Transactional
 	public boolean edit(DienThoai dt) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
-		if(DienThoaiDAO.getInstance().getById(dt.getMaDt())==null) {
+		if (DienThoaiDAO.getInstance().getById(dt.getMaDt()) == null) {
 			return false;
 		}
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.getTransaction().begin();
-			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan())+" VNĐ");
-			double thanhTien = dt.getGiaBan()-dt.getGiaBan()*dt.getGiamGia()/100;
+			dt.setHienThiGiaBan(formatter.format(dt.getGiaBan()) + " VNĐ");
+			double thanhTien = dt.getGiaBan() - dt.getGiaBan() * dt.getGiamGia() / 100;
 			dt.setThanhTien(thanhTien);
-			dt.setHienThiThanhTien(formatter.format(thanhTien)+" VNĐ");
+			dt.setHienThiThanhTien(formatter.format(thanhTien) + " VNĐ");
 			ses.update(dt);
-			System.out.println("edit: "+dt.getNhaSanXuat().getMaNsx());
 			ses.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return false;
-		}finally {
+		} finally {
 			ses.close();
 		}
 	}
+
 	@Transactional
 	public boolean delete(int id) {
-		if(DienThoaiDAO.getInstance().getById(id)==null) {
+		if (DienThoaiDAO.getInstance().getById(id) == null) {
 			return false;
 		}
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ses.getTransaction().begin();;
+			ses.getTransaction().begin();
+			;
 			DienThoai dt = (DienThoai) ses.get(DienThoai.class, id);
 			ses.delete(dt);
 			ses.getTransaction().commit();
@@ -123,7 +179,7 @@ public class DienThoaiDAO {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return false;
-		}finally {
+		} finally {
 			ses.close();
 		}
 	}
@@ -134,9 +190,9 @@ public class DienThoaiDAO {
 		try {
 			DienThoai dt = (DienThoai) ses.get(DienThoai.class, id);
 			return dt;
-		}catch(HibernateException ex) {
+		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
-		}finally {
+		} finally {
 			ses.close();
 		}
 		return new DienThoai();

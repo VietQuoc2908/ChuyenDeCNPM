@@ -22,13 +22,13 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-            <c:forEach items="${listByNsx}" var="item" varStatus="idx">
+            <c:forEach items="${list}" var="item" varStatus="idx">
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
                             <img style="height:230; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt="">
                         </div>
-                        <h2><a href="">${item.tenDt}</a></h2>
+                        <h2><a href="./single-product?maDt=${item.maDt}">${item.tenDt}</a></h2>
                         <c:if test="${item.giamGia > 0}">
                         <div class="product-carousel-price">
                             <ins>${item.hienThiThanhTien}</ins> <del>${item.hienThiGiaBan}</del>
@@ -57,11 +57,10 @@
                                 <span aria-hidden="true">&laquo;</span>
                               </a>
                             </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+
+                            <c:forEach items="${listWithPage}" var="item" varStatus="idx">
+                            <li><a href="./search?txtSearch=<%= request.getParameter("name") %>&pageid=${idx.index+1}">1</a></li>
+                            </c:forEach>
                             <li>
                               <a href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>

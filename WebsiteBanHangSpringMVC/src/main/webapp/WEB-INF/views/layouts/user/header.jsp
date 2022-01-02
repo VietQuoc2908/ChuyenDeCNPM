@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
 
@@ -15,13 +16,10 @@
 						%>
 						<li><a href="./login"><i class="fa fa-user"></i> Đăng nhập</a></li>
 						<%}else{ %>
-						<li><a href="./"><i class="fa fa-user"></i> Xin chào <%=session.getAttribute("taikhoan") %></a></li>
-						<%} %>
-						<li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+						<li><a href="./account"><i class="fa fa-user"></i> Xin chào <%=session.getAttribute("taikhoan") %></a></li>
 						<li><a href="./cart"><i class="fa fa-user"></i> Giỏ hàng</a></li>
-						<li><a href="./checkout"><i class="fa fa-user"></i>
-								Checkout</a></li>
-						
+						<li><a href="./history"><i class="fa fa-heart"></i> Lịch sử mua hàng</a></li>
+						<%} %>
 					</ul>
 				</div>
 			</div>
@@ -29,15 +27,8 @@
 			<div class="col-md-4">
 				<div class="header-right">
 					<ul class="list-unstyled list-inline">
-						<li class="dropdown dropdown-small"><a data-toggle="dropdown"
-							data-hover="dropdown" class="dropdown-toggle" href="#"><span
-								class="key">currency :</span><span class="value">USD </span><b
-								class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">USD</a></li>
-								<li><a href="#">INR</a></li>
-								<li><a href="#">GBP</a></li>
-							</ul></li>
+						<li class="dropdown dropdown-small"><span
+								class="key">Tiền tệ :</span><span class="value">VNĐ </span>
 						<%
 						if (session.getAttribute("taikhoan") == null || session.getAttribute("taikhoan").equals("")){
 						%>
@@ -67,7 +58,7 @@
 					%>
 					<%}else{ %>
                     <div class="shopping-item">
-                        <a href="cart">Giỏ hàng - <span id="giohang" class="cart-amunt">${gioHang.hienThiTongTien }</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="cart">Giỏ hàng - <span id="giohang" class="cart-amunt">${gioHang.hienThiTongTien }</span> <i class="fa fa-shopping-cart"></i></a>
                     </div>
                     <%} %>
                 </div>
@@ -89,14 +80,20 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="./index">Trang chủ</a></li>
-                        <li class="active"><a href="./shop">Shop page</a></li>
+                        <li><a href="./search?txtSearch=">Điện thoại</a></li>
                         <li><a href="./cart">Giỏ hàng</a></li>
-                        <li><a href="./checkout">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
+                        
                     </ul>
+                    <f:form action="./search" method="get" class="navbar-form navbar-right" role="search">
+				        <div class="form-group">
+				          <input type="text" name="txtSearch" class="form-control" placeholder="Tìm kiếm">
+				        </div>
+				        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+				      </f:form>
                 </div>  
+                
             </div>
         </div>
     </div> <!-- End mainmenu area -->

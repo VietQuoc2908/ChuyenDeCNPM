@@ -1,5 +1,5 @@
 package pojo;
-// Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final
+// Generated Jan 1, 2022, 12:34:54 PM by Hibernate Tools 5.5.7.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +14,6 @@ public class GioHang implements java.io.Serializable {
 	private double tongGiaTien;
 	private String hienThiTongTien;
 	private Set chiTietGioHangs = new HashSet(0);
-	private Set hoaDons = new HashSet(0);
 
 	public GioHang() {
 	}
@@ -26,14 +25,12 @@ public class GioHang implements java.io.Serializable {
 		this.hienThiTongTien = hienThiTongTien;
 	}
 
-	public GioHang(int maGh, KhachHang khachHang, double tongGiaTien, String hienThiTongTien, Set chiTietGioHangs,
-			Set hoaDons) {
+	public GioHang(int maGh, KhachHang khachHang, double tongGiaTien, String hienThiTongTien, Set chiTietGioHangs) {
 		this.maGh = maGh;
 		this.khachHang = khachHang;
 		this.tongGiaTien = tongGiaTien;
 		this.hienThiTongTien = hienThiTongTien;
 		this.chiTietGioHangs = chiTietGioHangs;
-		this.hoaDons = hoaDons;
 	}
 
 	public int getMaGh() {
@@ -74,14 +71,6 @@ public class GioHang implements java.io.Serializable {
 
 	public void setChiTietGioHangs(Set chiTietGioHangs) {
 		this.chiTietGioHangs = chiTietGioHangs;
-	}
-
-	public Set getHoaDons() {
-		return this.hoaDons;
-	}
-
-	public void setHoaDons(Set hoaDons) {
-		this.hoaDons = hoaDons;
 	}
 
 }

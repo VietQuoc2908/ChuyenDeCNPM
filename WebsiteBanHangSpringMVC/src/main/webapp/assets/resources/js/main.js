@@ -224,8 +224,59 @@ $(document).ready(function() {
 				}
 			}
 		)
-		
-		
+	});
+	
+	
+	$('body').delegate('.btnCancel', 'click', function(e) {
+		e.preventDefault();
+		var atag = $(this);
+		var maHd = atag.attr('data-id');
+		if (!confirm("Bạn có chắc chắn huỷ đơn hàng " + maHd + "?"))
+			return;
+		$.ajax(
+			{
+				url: './history/cancel-invoice/'+maHd,
+				method: "post",
+				success: function(data) {
+					console.log("ok");
+					if(data.isvalid){
+						
+						$('#txtWait_'+maHd+'').html("Đã huỷ").css('color','#cc2121');
+						atag.remove();
+					}
+
+				},
+				failed: function() {
+
+				}
+			}
+		)
+	});
+	
+	$('body').delegate('.btnReceived', 'click', function(e) {
+		e.preventDefault();
+		var atag = $(this);
+		var maHd = atag.attr('data-id');
+		if (!confirm("Xác nhận đã nhận được hàng từ hoá đơn " + maHd + "?"))
+			return;
+		$.ajax(
+			{
+				url: './history/received-invoice/'+maHd,
+				method: "post",
+				success: function(data) {
+					console.log("ok");
+					if(data.isvalid){
+						
+						$('#txtDeli_'+maHd+'').html("Đã giao").css('color','#3aeb34');
+						atag.remove();
+					}
+
+				},
+				failed: function() {
+
+				}
+			}
+		)
 	});
 });
 

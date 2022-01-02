@@ -14,16 +14,18 @@ import utils.HibernateUtil;
 public class DanhMucDAO {
 
 	private static DanhMucDAO instance;
-    private DanhMucDAO(){}
 
-    public static DanhMucDAO getInstance()
-    {
-        if (instance == null)
-            instance = new DanhMucDAO();
-        return instance;
-    }
-    @Transactional
-	public List<DanhMuc> getList() {	
+	private DanhMucDAO() {
+	}
+
+	public static DanhMucDAO getInstance() {
+		if (instance == null)
+			instance = new DanhMucDAO();
+		return instance;
+	}
+
+	@Transactional
+	public List<DanhMuc> getList() {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
@@ -38,7 +40,8 @@ public class DanhMucDAO {
 			ses.close();
 		}
 	}
-    @Transactional
+
+	@Transactional
 	public static boolean add(DanhMuc dm) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -54,7 +57,8 @@ public class DanhMucDAO {
 			ses.close();
 		}
 	}
-    @Transactional
+
+	@Transactional
 	public boolean edit(DanhMuc dm) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -70,7 +74,8 @@ public class DanhMucDAO {
 			ses.close();
 		}
 	}
-    @Transactional
+
+	@Transactional
 	public boolean delete(DanhMuc dm) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -86,7 +91,8 @@ public class DanhMucDAO {
 			ses.close();
 		}
 	}
-    @Transactional
+
+	@Transactional
 	public DanhMuc getByID(int id) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.beginTransaction();

@@ -57,7 +57,46 @@
 					<div class="latest-product">
 						<h2 class="section-title">Sản phẩm mới nhất</h2>
 						<div class="product-carousel">
-						<c:forEach items="${list}" var="item" varStatus="idx">
+						<c:forEach items="${listNew}" var="item" varStatus="idx">
+							<div class="single-product">
+								<div class="product-f-image">
+									<img style="height:180px; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt="">
+									<div class="product-hover">
+
+										<a href="#" class="add-to-cart-link btnAddCart" data-id="${item.maDt}" data-name="<%=session.getAttribute("taikhoan") %>"><i
+											class="fa fa-shopping-cart"></i> Add to cart</a> <a
+											href="./single-product?maDt=${item.maDt}" class="view-details-link"><i
+											class="fa fa-link"></i> Xem chi tiết</a>
+									</div>
+								</div>
+
+								<h2>
+									<a href="single-product.html"> ${item.tenDt} </a>
+								</h2>
+
+								<c:if test="${item.giamGia > 0}">
+								<div class="product-carousel-price">
+									<ins> ${item.hienThiThanhTien} </ins>
+									<del> ${item.hienThiGiaBan} </del>
+								</div>
+								</c:if>
+								<c:if test="${item.giamGia == 0}">
+								<div class="product-carousel-price">
+									<ins> ${item.hienThiThanhTien} </ins>
+								</div>
+								</c:if>
+							</div>
+						</c:forEach>
+
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-12">
+					<div class="latest-product">
+						<h2 class="section-title">Sản phẩm giảm giá</h2>
+						<div class="product-carousel">
+						<c:forEach items="${listDis}" var="item" varStatus="idx">
 							<div class="single-product">
 								<div class="product-f-image">
 									<img style="height:180px; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt="">
@@ -104,7 +143,7 @@
 					<div class="brand-wrapper">
 						<div class="brand-list">
 						<c:forEach items="${listNSX}" var="item" varStatus="idx">
-						<a href="./shop?maNsx=${item.maNsx}">
+						<a href="./search?txtSearch=${item.tenNsx}">
 							<img style="width:200px; object-fix:cover" src="data:image/jpg;base64,${item.base64image}" alt=""> 
 						</a>
 						</c:forEach>

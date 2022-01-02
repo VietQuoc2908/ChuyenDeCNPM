@@ -17,39 +17,40 @@ import utils.HibernateUtil;
 public class ChiTietGioHangDAO {
 
 	private static ChiTietGioHangDAO instance;
-    private ChiTietGioHangDAO(){}
 
-    public static ChiTietGioHangDAO getInstance()
-    {
-        if (instance == null)
-            instance = new ChiTietGioHangDAO();
-        return instance;
-    }
+	private ChiTietGioHangDAO() {
+	}
+
+	public static ChiTietGioHangDAO getInstance() {
+		if (instance == null)
+			instance = new ChiTietGioHangDAO();
+		return instance;
+	}
 
 	public boolean insertCTGH(ChiTietGioHang ctgh, DienThoai dt, GioHang gh, int quantity_dt) {
-		
+
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
-    	Session ses = HibernateUtil.getSessionFactory().openSession();
+		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			
+
 			ctgh.setGioHang(gh);
 			ctgh.setDienThoai(dt);
 			ctgh.setSoLuong(quantity_dt);
 			ctgh.setDonGia(dt.getThanhTien());
 			ctgh.setTongTien(dt.getThanhTien());
-			ctgh.setHienThiTongTien(formatter.format(dt.getThanhTien())+" VNĐ");
+			ctgh.setHienThiTongTien(formatter.format(dt.getThanhTien()) + " VNĐ");
 			ses.save(ctgh);
-			
-			Double tongTien = gh.getTongGiaTien()+ctgh.getTongTien();
+
+			Double tongTien = gh.getTongGiaTien() + ctgh.getTongTien();
 			gh.setTongGiaTien(tongTien);
-			gh.setHienThiTongTien(formatter.format(tongTien)+" VNĐ");
+			gh.setHienThiTongTien(formatter.format(tongTien) + " VNĐ");
 			ses.update(gh);
-			
+
 			ses.getTransaction().commit();
-			
+
 			return true;
-			
+
 		} catch (Exception e) {
 			ses.getTransaction().rollback();
 			System.out.println(e);
@@ -57,33 +58,34 @@ public class ChiTietGioHangDAO {
 		} finally {
 			ses.close();
 		}
-    }
-	
-	
+	}
+
 	public boolean deleteCTGH(int maCTGH, GioHang gh) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ses.getTransaction().begin();;
+			ses.getTransaction().begin();
+
 			ChiTietGioHang ctgh = (ChiTietGioHang) ses.get(ChiTietGioHang.class, maCTGH);
 			ses.delete(ctgh);
-			
-			Double tongTien = gh.getTongGiaTien()-ctgh.getTongTien();
+
+			Double tongTien = gh.getTongGiaTien() - ctgh.getTongTien();
 			gh.setTongGiaTien(tongTien);
-			gh.setHienThiTongTien(formatter.format(tongTien)+" VNĐ");
+			gh.setHienThiTongTien(formatter.format(tongTien) + " VNĐ");
 			ses.update(gh);
-			
+
 			ses.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return false;
-		}finally {
+		} finally {
 			ses.close();
 		}
 	}
 	
+
 	public boolean updateCTGH(int maCTGH, int soluong) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -91,10 +93,10 @@ public class ChiTietGioHangDAO {
 			ses.getTransaction().begin();
 			ChiTietGioHang ctgh = (ChiTietGioHang) ses.get(ChiTietGioHang.class, maCTGH);
 			ctgh.setSoLuong(soluong);
-			Double tongTien = soluong*ctgh.getDonGia();
+			Double tongTien = soluong * ctgh.getDonGia();
 			ctgh.setTongTien(tongTien);
-			ctgh.setHienThiTongTien(formatter.format(tongTien)+" VNĐ");
-			
+			ctgh.setHienThiTongTien(formatter.format(tongTien) + " VNĐ");
+
 			ses.update(ctgh);
 			ses.getTransaction().commit();
 			return true;
@@ -102,16 +104,16 @@ public class ChiTietGioHangDAO {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return false;
-		}finally {
+		} finally {
 			ses.close();
 		}
 	}
-	
-	public List<ChiTietGioHang> getList(int maGH){
-    	Session ses = HibernateUtil.getSessionFactory().openSession();
+
+	public List<ChiTietGioHang> getList(int maGH) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			Query q = ses.createQuery("from ChiTietGioHang where maGH = "+ maGH +"");
+			Query q = ses.createQuery("from ChiTietGioHang where maGH = " + maGH + "");
 			ses.getTransaction().commit();
 			return q.list();
 		} catch (Exception e) {
@@ -121,40 +123,41 @@ public class ChiTietGioHangDAO {
 		} finally {
 			ses.close();
 		}
-    	
-    }
-	
+
+	}
+
 	public boolean checkExitCTGH(int maGH, int maDt) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
-			ses.getTransaction().begin();;
+			ses.getTransaction().begin();
+			;
 			List<ChiTietGioHang> list = ChiTietGioHangDAO.getInstance().getList(maGH);
 			for (ChiTietGioHang chiTietGioHang : list) {
-				if(chiTietGioHang.getDienThoai().getMaDt()==maDt) {
+				if (chiTietGioHang.getDienThoai().getMaDt() == maDt) {
 					ses.getTransaction().commit();
 					return true;
 				}
-			}	
+			}
 			ses.getTransaction().commit();
 			return false;
 		} catch (Exception e) {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return false;
-		}finally {
+		} finally {
 			ses.close();
 		}
 	}
-	
+
 	public ChiTietGioHang getById(int maCTGH) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
 		try {
 			ChiTietGioHang ctgh = (ChiTietGioHang) ses.get(ChiTietGioHang.class, maCTGH);
 			return ctgh;
-		}catch(HibernateException ex) {
+		} catch (HibernateException ex) {
 			System.out.println(ex.getMessage());
-		}finally {
+		} finally {
 			ses.close();
 		}
 		return new ChiTietGioHang();

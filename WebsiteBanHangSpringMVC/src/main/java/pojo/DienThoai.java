@@ -1,5 +1,5 @@
 package pojo;
-// Generated Dec 22, 2021, 9:51:21 AM by Hibernate Tools 5.5.7.Final
+// Generated Jan 1, 2022, 12:34:54 PM by Hibernate Tools 5.5.7.Final
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -33,6 +33,7 @@ public class DienThoai implements java.io.Serializable {
 	private String hienThiGiaBan;
 	private String hienThiThanhTien;
 	private Set chiTietGioHangs = new HashSet(0);
+	private Set chiTietHoaDons = new HashSet(0);
 
 	public DienThoai() {
 	}
@@ -55,7 +56,7 @@ public class DienThoai implements java.io.Serializable {
 			String base64image, String moTa, String manHinh, String heDieuHanh,
 			String cameraTruoc, String cameraSau, String chip, String ram, String rom,
 			String sim, String pin, double giaBan, int tonKho, int giamGia, double thanhTien,
-			String hienThiGiaBan, String hienThiThanhTien, Set chiTietGioHangs) {
+			String hienThiGiaBan, String hienThiThanhTien, Set chiTietGioHangs, Set chiTietHoaDons) {
 		this.maDt = maDt;
 		this.danhMuc = danhMuc;
 		this.nhaSanXuat = nhaSanXuat;
@@ -79,6 +80,7 @@ public class DienThoai implements java.io.Serializable {
 		this.hienThiGiaBan = hienThiGiaBan;
 		this.hienThiThanhTien = hienThiThanhTien;
 		this.chiTietGioHangs = chiTietGioHangs;
+		this.chiTietHoaDons = chiTietHoaDons;
 	}
 
 	public int getMaDt() {
@@ -263,6 +265,14 @@ public class DienThoai implements java.io.Serializable {
 
 	public void setChiTietGioHangs(Set chiTietGioHangs) {
 		this.chiTietGioHangs = chiTietGioHangs;
+	}
+
+	public Set getChiTietHoaDons() {
+		return this.chiTietHoaDons;
+	}
+
+	public void setChiTietHoaDons(Set chiTietHoaDons) {
+		this.chiTietHoaDons = chiTietHoaDons;
 	}
 
 }

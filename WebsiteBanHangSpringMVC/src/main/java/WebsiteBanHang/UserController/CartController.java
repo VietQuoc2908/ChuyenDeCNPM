@@ -34,79 +34,71 @@ import pojo.GioHang;
 import pojo.KhachHang;
 
 @Controller
-@RequestMapping(value="/cart")
+@RequestMapping(value = "/cart")
 public class CartController {
 
-	@RequestMapping(value="/add-product/{maDt}/{taikhoan}/{quantity_dt}",method = RequestMethod.POST, produces="application/json")
+	@RequestMapping(value = "/add-product/{maDt}/{taikhoan}/{quantity_dt}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public Map<String, String> AddProductToCart(@PathVariable("maDt") int maDt, @PathVariable("taikhoan") String taikhoan, @PathVariable("quantity_dt") int quantity_dt ,ModelMap model) {
-		
+	public Map<String, String> AddProductToCart(@PathVariable("maDt") int maDt,
+			@PathVariable("taikhoan") String taikhoan, @PathVariable("quantity_dt") int quantity_dt, ModelMap model) {
+
 		HashMap<String, String> map = new HashMap<String, String>();
 		DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
-		
+
 		KhachHang kh = KhachHangDAO.getInstance().getByTaiKhoan(taikhoan);
-		
+
 		GioHang gh = GioHangDAO.getInstance().getGioHangByKH(kh.getMaKh());
 		ChiTietGioHang ctgh = new ChiTietGioHang();
 		System.out.println(ChiTietGioHangDAO.getInstance().checkExitCTGH(gh.getMaGh(), maDt));
-		if(ChiTietGioHangDAO.getInstance().checkExitCTGH(gh.getMaGh(), maDt)) {
+		if (ChiTietGioHangDAO.getInstance().checkExitCTGH(gh.getMaGh(), maDt)) {
 			map.put("exits", "true");
-		}else {
-			if(ChiTietGioHangDAO.getInstance().insertCTGH(ctgh, dt, gh, quantity_dt)) {
+		} else {
+			if (ChiTietGioHangDAO.getInstance().insertCTGH(ctgh, dt, gh, quantity_dt)) {
 				map.put("isvalid", "true");
-			}else {
+			} else {
 				map.put("isvalid", "false");
 			}
 		}
 		return map;
 	}
-	
-	
-	@RequestMapping(value="/del-product/{maCtgh}/{taikhoan}",method = RequestMethod.POST, produces="application/json")
+
+	@RequestMapping(value = "/del-product/{maCtgh}/{taikhoan}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public Map<String, String> DelProductToCart(@PathVariable("maCtgh") int maCtgh, @PathVariable("taikhoan") String taikhoan,ModelMap model) {
-		
+	public Map<String, String> DelProductToCart(@PathVariable("maCtgh") int maCtgh,
+			@PathVariable("taikhoan") String taikhoan, ModelMap model) {
+
 		HashMap<String, String> map = new HashMap<String, String>();
-		
+
 		KhachHang kh = KhachHangDAO.getInstance().getByTaiKhoan(taikhoan);
-		
+
 		GioHang gh = GioHangDAO.getInstance().getGioHangByKH(kh.getMaKh());
-		if(ChiTietGioHangDAO.getInstance().deleteCTGH(maCtgh, gh)) {
+		if (ChiTietGioHangDAO.getInstance().deleteCTGH(maCtgh, gh)) {
 			map.put("isvalid", "true");
 		}
 		GioHangDAO.getInstance().updateTongTien(gh);
-		map.put("hienThiTongTienGH",gh.getHienThiTongTien());
+		map.put("hienThiTongTienGH", gh.getHienThiTongTien());
 		map.put("isvalid", "false");
 		return map;
 	}
-	
-	@RequestMapping(value="/update-product/{maCtgh}/{soluong}/{taikhoan}",method = RequestMethod.POST, produces="application/json")
+
+	@RequestMapping(value = "/update-product/{maCtgh}/{soluong}/{taikhoan}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public Map<String, String> UpdateCart(@PathVariable("maCtgh") int maCtgh,@PathVariable("soluong") int soluong, @PathVariable("taikhoan") String taikhoan,ModelMap model) {
-		
+	public Map<String, String> UpdateCart(@PathVariable("maCtgh") int maCtgh, @PathVariable("soluong") int soluong,
+			@PathVariable("taikhoan") String taikhoan, ModelMap model) {
+
 		HashMap<String, String> map = new HashMap<String, String>();
-		
+
 		KhachHang kh = KhachHangDAO.getInstance().getByTaiKhoan(taikhoan);
-		
+
 		GioHang gh = GioHangDAO.getInstance().getGioHangByKH(kh.getMaKh());
-		if(ChiTietGioHangDAO.getInstance().updateCTGH(maCtgh, soluong)) {
+		if (ChiTietGioHangDAO.getInstance().updateCTGH(maCtgh, soluong)) {
 			map.put("hienThiThanhTienCTGH", ChiTietGioHangDAO.getInstance().getById(maCtgh).getHienThiTongTien());
 			map.put("isvalid", "true");
 		}
 		GioHangDAO.getInstance().updateTongTien(gh);
-		map.put("hienThiTongTienGH",gh.getHienThiTongTien());
+		map.put("hienThiTongTienGH", gh.getHienThiTongTien());
 		map.put("isvalid", "false");
 		return map;
-	}
-	
-	
-	@RequestMapping(value="", params = "checkout",method = RequestMethod.POST)
-	public ModelAndView CheckoutCart(@ModelAttribute("chitietgiohang") ChiTietGioHang model, HttpSession session) throws IOException{
-		ModelAndView mv = new ModelAndView("/user/cart");
-		
-		
-		System.out.println("Action2 block called");
-		return mv;
 	}
 
 }

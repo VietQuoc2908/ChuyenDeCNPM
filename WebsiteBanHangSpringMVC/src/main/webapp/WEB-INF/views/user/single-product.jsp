@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="product-bit-title text-center">
-						<h2>Shop</h2>
+						<h2>Mua sắm</h2>
 					</div>
 				</div>
 			</div>
@@ -88,8 +88,7 @@
 				<div class="col-md-8">
 					<div class="product-content-right">
 						<div class="product-breadcroumb">
-							<a href="">Home</a> <a href="">Category Name</a> <a href="">Sony
-								Smart TV - 2015</a>
+							
 						</div>
 
 						<div class="row">
@@ -110,7 +109,7 @@
 
 							<div class="col-sm-6">
 								<div class="product-inner">
-									<h2 class="product-name">Sony Smart TV - 2015</h2>
+									<h2 class="product-name">${dienthoai.tenDt }</h2>
 									<c:if test="${dienthoai.giamGia > 0}">
 										<div class="product-inner-price">
 											<ins> ${dienthoai.hienThiThanhTien} </ins>
@@ -134,9 +133,9 @@
 									<div role="tabpanel">
 										<ul class="product-tab" role="tablist">
 											<li role="presentation" class="active"><a href="#home"
-												aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+												aria-controls="home" role="tab" data-toggle="tab">Mô tả</a></li>
 											<li role="presentation"><a href="#profile"
-												aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+												aria-controls="profile" role="tab" data-toggle="tab">Nhận xét</a></li>
 										</ul>
 										<div class="tab-content">
 											<div role="tabpanel" class="tab-pane fade in active"
