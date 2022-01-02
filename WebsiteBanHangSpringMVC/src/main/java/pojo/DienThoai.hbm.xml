@@ -1,85 +1,89 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated Jan 1, 2022, 12:34:54 PM by Hibernate Tools 5.5.7.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
-    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="pojo.DienThoai" optimistic-lock="none" polymorphism="implicit" select-before-update="false" table="DienThoai">
-        <id name="maDt" type="int">
-            <column name="maDT"/>
-            <generator class="native"/>
-        </id>
-        <many-to-one class="pojo.DanhMuc" embed-xml="true" fetch="select" insert="true" name="danhMuc" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="tenDM" not-null="true"/>
-        </many-to-one>
-        <many-to-one class="pojo.NhaSanXuat" embed-xml="true" fetch="select" insert="true" name="nhaSanXuat" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="maNSX" not-null="true"/>
-        </many-to-one>
-        <property generated="never" lazy="false" name="tenDt" optimistic-lock="true" type="string" unique="false">
-            <column name="tenDT" not-null="true"/>
-        </property>
-        <property generated="never" lazy="false" name="hinhAnh" optimistic-lock="true" type="binary" unique="false">
-            <column name="hinhAnh"/>
-        </property>
-        <property generated="never" lazy="false" name="base64image" optimistic-lock="true" type="string" unique="false">
-            <column name="base64Image"/>
-        </property>
-        <property generated="never" lazy="false" name="moTa" optimistic-lock="true" type="string" unique="false">
-            <column name="moTa"/>
-        </property>
-        <property generated="never" lazy="false" name="manHinh" optimistic-lock="true" type="string" unique="false">
-            <column name="manHinh"/>
-        </property>
-        <property generated="never" lazy="false" name="heDieuHanh" optimistic-lock="true" type="string" unique="false">
-            <column name="heDieuHanh"/>
-        </property>
-        <property generated="never" lazy="false" name="cameraTruoc" optimistic-lock="true" type="string" unique="false">
-            <column name="cameraTruoc"/>
-        </property>
-        <property generated="never" lazy="false" name="cameraSau" optimistic-lock="true" type="string" unique="false">
-            <column name="cameraSau"/>
-        </property>
-        <property generated="never" lazy="false" name="chip" optimistic-lock="true" type="string" unique="false">
-            <column name="chip"/>
-        </property>
-        <property generated="never" lazy="false" name="ram" optimistic-lock="true" type="string" unique="false">
-            <column name="ram"/>
-        </property>
-        <property generated="never" lazy="false" name="rom" optimistic-lock="true" type="string" unique="false">
-            <column name="rom"/>
-        </property>
-        <property generated="never" lazy="false" name="sim" optimistic-lock="true" type="string" unique="false">
-            <column name="sim"/>
-        </property>
-        <property generated="never" lazy="false" name="pin" optimistic-lock="true" type="string" unique="false">
-            <column name="pin"/>
-        </property>
-        <property generated="never" lazy="false" name="giaBan" optimistic-lock="true" type="double" unique="false">
-            <column name="giaBan" not-null="true" precision="53" scale="0"/>
-        </property>
-        <property generated="never" lazy="false" name="tonKho" optimistic-lock="true" type="int" unique="false">
-            <column name="tonKho" not-null="true"/>
-        </property>
-        <property generated="never" lazy="false" name="giamGia" optimistic-lock="true" type="int" unique="false">
-            <column name="giamGia" not-null="true"/>
-        </property>
-        <property generated="never" lazy="false" name="thanhTien" optimistic-lock="true" type="double" unique="false">
-            <column name="thanhTien" not-null="true" precision="53" scale="0"/>
-        </property>
-        <property generated="never" lazy="false" name="hienThiGiaBan" optimistic-lock="true" type="string" unique="false">
-            <column length="50" name="hienThiGiaBan" not-null="true"/>
-        </property>
-        <property generated="never" lazy="false" name="hienThiThanhTien" optimistic-lock="true" type="string" unique="false">
-            <column length="50" name="hienThiThanhTien" not-null="true"/>
-        </property>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chiTietGioHangs" optimistic-lock="true" sort="unsorted" table="ChiTietGioHang">
-            <key on-delete="noaction">
-                <column name="maDT" not-null="true"/>
-            </key>
-            <one-to-many class="pojo.ChiTietGioHang" embed-xml="true" not-found="exception"/>
-        </set>
-        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="chiTietHoaDons" optimistic-lock="true" sort="unsorted" table="ChiTietHoaDon">
-            <key on-delete="noaction">
-                <column name="maDT" not-null="true"/>
-            </key>
-            <one-to-many class="pojo.ChiTietHoaDon" embed-xml="true" not-found="exception"/>
-        </set>
-    </class>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 1, 2022, 12:34:54 PM by Hibernate Tools 5.5.7.Final -->
+<hibernate-mapping default-lazy="false">
+ <class name="pojo.DienThoai" optimistic-lock="none" table="DienThoai">
+  <id name="maDt" type="int">
+   <column name="maDT"/>
+   <generator class="native"/>
+  </id>
+  <many-to-one class="pojo.DanhMuc" fetch="select" name="danhMuc">
+   <column name="tenDM" not-null="true"/>
+  </many-to-one>
+  <many-to-one class="pojo.NhaSanXuat" fetch="select" name="nhaSanXuat">
+   <column name="maNSX" not-null="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="tenDt" type="string">
+   <column name="tenDT" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="hinhAnh" type="binary">
+   <column name="hinhAnh"/>
+  </property>
+  <property generated="never" lazy="false" name="base64image" type="string">
+   <column name="base64Image"/>
+  </property>
+  <property generated="never" lazy="false" name="moTa" type="string">
+   <column name="moTa"/>
+  </property>
+  <property generated="never" lazy="false" name="manHinh" type="string">
+   <column name="manHinh"/>
+  </property>
+  <property generated="never" lazy="false" name="heDieuHanh" type="string">
+   <column name="heDieuHanh"/>
+  </property>
+  <property generated="never" lazy="false" name="cameraTruoc" type="string">
+   <column name="cameraTruoc"/>
+  </property>
+  <property generated="never" lazy="false" name="cameraSau" type="string">
+   <column name="cameraSau"/>
+  </property>
+  <property generated="never" lazy="false" name="chip" type="string">
+   <column name="chip"/>
+  </property>
+  <property generated="never" lazy="false" name="ram" type="string">
+   <column name="ram"/>
+  </property>
+  <property generated="never" lazy="false" name="rom" type="string">
+   <column name="rom"/>
+  </property>
+  <property generated="never" lazy="false" name="sim" type="string">
+   <column name="sim"/>
+  </property>
+  <property generated="never" lazy="false" name="pin" type="string">
+   <column name="pin"/>
+  </property>
+  <property generated="never" lazy="false" name="giaBan" type="double">
+   <column name="giaBan" not-null="true" precision="53" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="tonKho" type="int">
+   <column name="tonKho" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="giamGia" type="int">
+   <column name="giamGia" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="thanhTien" type="double">
+   <column name="thanhTien" not-null="true" precision="53" scale="0"/>
+  </property>
+  <property generated="never" lazy="false" name="hienThiGiaBan" type="string">
+   <column length="50" name="hienThiGiaBan" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="hienThiThanhTien" type="string">
+   <column length="50" name="hienThiThanhTien" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="chiTietGioHangs"
+   sort="unsorted" table="ChiTietGioHang">
+   <key>
+    <column name="maDT" not-null="true"/>
+   </key>
+   <one-to-many class="pojo.ChiTietGioHang"/>
+  </set>
+  <set fetch="select" inverse="true" lazy="true" name="chiTietHoaDons"
+   sort="unsorted" table="ChiTietHoaDon">
+   <key>
+    <column name="maDT" not-null="true"/>
+   </key>
+   <one-to-many class="pojo.ChiTietHoaDon"/>
+  </set>
+ </class>
 </hibernate-mapping>

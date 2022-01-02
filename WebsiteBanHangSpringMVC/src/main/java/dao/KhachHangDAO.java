@@ -1,6 +1,7 @@
 package dao;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,7 +12,6 @@ import org.hibernate.query.Query;
 
 import pojo.DienThoai;
 import pojo.KhachHang;
-import pojo.TaiKhoan;
 import utils.HibernateUtil;
 
 public class KhachHangDAO {
@@ -25,6 +25,22 @@ public class KhachHangDAO {
 		if (instance == null)
 			instance = new KhachHangDAO();
 		return instance;
+	}
+	
+	public List<KhachHang> getList() {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery("from KhachHang");
+			ses.getTransaction().commit();
+			return q.list();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<KhachHang>();
+		} finally {
+			ses.close();
+		}
 	}
 
 	public KhachHang getByTaiKhoan(String taikhoan) {
@@ -54,6 +70,23 @@ public class KhachHangDAO {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return false;
+		} finally {
+			ses.close();
+		}
+	}
+	
+	public List<KhachHang> getListByText(String txtSearch) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery("from KhachHang where taikhoan like :txtSearch or tenKH like :txtSearch or sdt like :txtSearch or diachi like :txtSearch");
+			q.setParameter("txtSearch", "%" + txtSearch + "%");
+			ses.getTransaction().commit();
+			return q.list();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<KhachHang>();
 		} finally {
 			ses.close();
 		}
