@@ -63,16 +63,29 @@
 										<td>${idx.index+1}</td>
 										<td>${item.maHd}</td>
 										<td>${item.khachHang.maKh}</td>
-										<td>Chờ xác nhận</td>
+										<c:choose>
+											<c:when test="${item.status == 0 }">
+												<td style="color:blue">Chờ xác nhận</td>
+											</c:when>
+											<c:when test="${item.status == 1 }">
+												<td style="color:yellow">Đang giao</td>
+											</c:when>
+											<c:when test="${item.status == 2 }">
+												<td style="color:green">Đã giao</td>
+											</c:when>
+											<c:otherwise>
+												<td style="color:red">Đã hủy</td>
+											</c:otherwise>
+										</c:choose>
 										<td>${item.tongTien}</td>
 										<td>${item.hienThiTongTien}</td>
 										<td class="project-actions text-right"><a
-											class="btn btn-primary btn-sm" href="../detail-hoadon?maHd=${item.maHd }"> <i
+											class="btn btn-primary btn-sm" href="./orders/detail-order?maHd=${item.maHd }"> <i
 												class="fas fa-folder"> </i> Chi tiết
 										</a> <a class="btn btn-info btn-sm" href="#"> <i
 												class="fas fa-pencil-alt"> </i> Xác nhận
 										</a> <a class="btn btn-danger btn-sm btnDelProduct" href="#" data-id="${item.maHd}"> <i
-												class="fas fa-trash"> </i> Xoá
+												class="fas fa-trash"> </i> Hủy
 										</a></td>
 									</tr>
 									</c:forEach>
