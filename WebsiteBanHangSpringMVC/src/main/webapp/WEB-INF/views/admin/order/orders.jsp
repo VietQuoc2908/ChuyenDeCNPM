@@ -65,10 +65,10 @@
 										<td>${item.khachHang.maKh}</td>
 										<c:choose>
 											<c:when test="${item.status == 0 }">
-												<td style="color:blue">Chờ xác nhận</td>
+												<td style="color:blue" id="txtWait_${item.maHd}">Chờ xác nhận</td>
 											</c:when>
 											<c:when test="${item.status == 1 }">
-												<td style="color:yellow">Đang giao</td>
+												<td style="color:yellow" id="txtDeli_${item.maHd}">Đang giao</td>
 											</c:when>
 											<c:when test="${item.status == 2 }">
 												<td style="color:green">Đã giao</td>
@@ -80,11 +80,13 @@
 										<td>${item.tongTien}</td>
 										<td>${item.hienThiTongTien}</td>
 										<td class="project-actions text-right"><a
-											class="btn btn-primary btn-sm" href="./orders/detail-order?maHd=${item.maHd }"> <i
+											class="btn btn-primary btn-sm" type="button" href="./orders/detail-order?maHd=${item.maHd }"> <i
 												class="fas fa-folder"> </i> Chi tiết
-										</a> <a class="btn btn-info btn-sm" href="#"> <i
+										</a> <a class="btn btn-info btn-sm btnConfirmOrder" type="button" data-id="${item.maHd}"> <i
 												class="fas fa-pencil-alt"> </i> Xác nhận
-										</a> <a class="btn btn-danger btn-sm btnDelProduct" href="#" data-id="${item.maHd}"> <i
+										</a> <a class="btn btn-info btn-sm btnReceivedOrder" type="button" data-id="${item.maHd}"> <i
+												class="fas fa-pencil-alt"> </i> Đã giao
+										</a> <a class="btn btn-danger btn-sm btnCancelOrder" id="btnCancel_${item.maHd}" type="button" data-id="${item.maHd}"> <i
 												class="fas fa-trash"> </i> Hủy
 										</a></td>
 									</tr>
