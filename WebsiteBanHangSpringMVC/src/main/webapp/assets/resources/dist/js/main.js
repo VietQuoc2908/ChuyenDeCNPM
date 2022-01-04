@@ -65,9 +65,8 @@ $(document).ready(function() {
 	$('body').delegate('.btnCancelOrder', 'click', function(e) {
 		e.preventDefault();
 		var atag = $(this);
-		var btnConfirm = $('#btnConfirm_'+maHd+'');
-		console.log(btnConfirm);
 		var maHd = atag.attr('data-id');
+		var btnConfirm = $('#btnConfirm_'+maHd+'');
 		if (!confirm("Bạn có chắc chắn huỷ đơn hàng " + maHd + "?"))
 			return;
 		$.ajax(

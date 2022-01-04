@@ -71,7 +71,7 @@
 												<td style="color:yellow" id="txtDeli_${item.maHd}">Đang giao</td>
 											</c:when>
 											<c:when test="${item.status == 2 }">
-												<td style="color:green">Đã giao</td>
+												<td style="color:green" id="txtWait_${item.maHd}">Đã giao</td>
 											</c:when>
 											<c:otherwise>
 												<td style="color:red">Đã hủy</td>
@@ -85,7 +85,7 @@
 										</a> 
 										<c:choose>
 											<c:when test="${item.status == 0 }">
-										<a class="btn btn-info btn-sm btnConfirmOrder" id="btnConfirm_${item.maHd }" type="button" data-id="${item.maHd}"> <i
+										<a class="btn btn-info btn-sm btnConfirmOrder" id="btnConfirm_${item.maHd}" type="button" data-id="${item.maHd}"> <i
 												class="fas fa-pencil-alt"> </i> Xác nhận
 										</a> 
 										<a class="btn btn-danger btn-sm btnCancelOrder" id="btnCancel_${item.maHd}" type="button" data-id="${item.maHd}"> <i
@@ -95,7 +95,7 @@
 											<c:when test="${item.status == 1 }">
 											
 										<a class="btn btn-info btn-sm btnReceivedOrder" type="button" data-id="${item.maHd}"> <i
-												class="fas fa-pencil-alt"> </i> Đã giao
+												class="fas fa-check"> </i> Đã giao
 										</a> 
 											</c:when>
 											<c:otherwise>
