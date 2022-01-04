@@ -82,13 +82,27 @@
 										<td class="project-actions text-right"><a
 											class="btn btn-primary btn-sm" type="button" href="./orders/detail-order?maHd=${item.maHd }"> <i
 												class="fas fa-folder"> </i> Chi tiết
-										</a> <a class="btn btn-info btn-sm btnConfirmOrder" type="button" data-id="${item.maHd}"> <i
+										</a> 
+										<c:choose>
+											<c:when test="${item.status == 0 }">
+										<a class="btn btn-info btn-sm btnConfirmOrder" id="btnConfirm_${item.maHd }" type="button" data-id="${item.maHd}"> <i
 												class="fas fa-pencil-alt"> </i> Xác nhận
-										</a> <a class="btn btn-info btn-sm btnReceivedOrder" type="button" data-id="${item.maHd}"> <i
-												class="fas fa-pencil-alt"> </i> Đã giao
-										</a> <a class="btn btn-danger btn-sm btnCancelOrder" id="btnCancel_${item.maHd}" type="button" data-id="${item.maHd}"> <i
+										</a> 
+										<a class="btn btn-danger btn-sm btnCancelOrder" id="btnCancel_${item.maHd}" type="button" data-id="${item.maHd}"> <i
 												class="fas fa-trash"> </i> Hủy
-										</a></td>
+										</a>
+											</c:when>
+											<c:when test="${item.status == 1 }">
+											
+										<a class="btn btn-info btn-sm btnReceivedOrder" type="button" data-id="${item.maHd}"> <i
+												class="fas fa-pencil-alt"> </i> Đã giao
+										</a> 
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
+										</c:choose>
+										</td>
+										
 									</tr>
 									</c:forEach>
 								</tbody>

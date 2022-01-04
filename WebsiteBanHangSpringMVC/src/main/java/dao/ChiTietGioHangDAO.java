@@ -38,8 +38,9 @@ public class ChiTietGioHangDAO {
 			ctgh.setDienThoai(dt);
 			ctgh.setSoLuong(quantity_dt);
 			ctgh.setDonGia(dt.getThanhTien());
-			ctgh.setTongTien(dt.getThanhTien());
-			ctgh.setHienThiTongTien(formatter.format(dt.getThanhTien()) + " VNĐ");
+			double thanhTien = quantity_dt*dt.getThanhTien();
+			ctgh.setTongTien(thanhTien);
+			ctgh.setHienThiTongTien(formatter.format(thanhTien) + " VNĐ");
 			ses.save(ctgh);
 
 			Double tongTien = gh.getTongGiaTien() + ctgh.getTongTien();

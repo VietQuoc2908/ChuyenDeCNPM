@@ -65,12 +65,14 @@ $(document).ready(function() {
 	$('body').delegate('.btnCancelOrder', 'click', function(e) {
 		e.preventDefault();
 		var atag = $(this);
+		var btnConfirm = $('#btnConfirm_'+maHd+'');
+		console.log(btnConfirm);
 		var maHd = atag.attr('data-id');
 		if (!confirm("Bạn có chắc chắn huỷ đơn hàng " + maHd + "?"))
 			return;
 		$.ajax(
 			{
-				url: './cancel-order/'+maHd,
+				url: './orders/cancel-order/'+maHd,
 				method: "post",
 				success: function(data) {
 					console.log("ok");
@@ -78,6 +80,7 @@ $(document).ready(function() {
 						
 						$('#txtWait_'+maHd+'').html("Đã huỷ").css('color','red');
 						atag.remove();
+						btnConfirm.remove();
 					}
 
 				},
@@ -97,7 +100,7 @@ $(document).ready(function() {
 			return;
 		$.ajax(
 			{
-				url: './confirm-order/'+maHd,
+				url: './orders/confirm-order/'+maHd,
 				method: "post",
 				success: function(data) {
 					console.log("ok");
@@ -124,7 +127,7 @@ $(document).ready(function() {
 			return;
 		$.ajax(
 			{
-				url: './received-order/'+maHd,
+				url: './orders/received-order/'+maHd,
 				method: "post",
 				success: function(data) {
 					console.log("ok");

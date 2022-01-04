@@ -24,19 +24,19 @@
 			<ul class="nav nav-pills nav-sidebar flex-column"
 				data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-header">DANH MỤC QUẢN LÝ</li>
-				<li class="nav-item"><a href="../../../WebsiteBanHangSpringMVC/admin/products"
+				<li class="nav-item"><a href="../../../<%=request.getContextPath() %>/admin/products"
 					class="nav-link"> <i class="nav-icon far fa-image"></i>
 						<p>Sản phẩm</p>
 				</a></li>
-				<li class="nav-item"><a href="../../../WebsiteBanHangSpringMVC/admin/manufactores"
+				<li class="nav-item"><a href="../../../<%=request.getContextPath() %>/admin/manufactores"
 					class="nav-link"> <i class="nav-icon fas fa-columns"></i>
 						<p>Nhà sản xuất</p>
 				</a></li>
-				<li class="nav-item"><a href="../../../WebsiteBanHangSpringMVC/admin/customers?txtSearch="
+				<li class="nav-item"><a href="../../../<%=request.getContextPath() %>/admin/customers?txtSearch="
 					class="nav-link"> <i class="nav-icon fas fa-columns"></i>
 						<p>Khách hàng</p>
 				</a></li>
-				<li class="nav-item"><a href="../../../WebsiteBanHangSpringMVC/admin/orders"
+				<li class="nav-item"><a href="../../../<%=request.getContextPath() %>/admin/orders"
 					class="nav-link"> <i class="nav-icon fas fa-columns"></i>
 						<p>Đơn hàng</p>
 				</a></li>
