@@ -3,6 +3,7 @@ package WebsiteBanHang.AdminController;
 import java.io.*;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
@@ -36,9 +37,9 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping(value = "")
-	public String Index(ModelMap model) throws Exception {
-		model.addAttribute("list", DienThoaiDAO.getInstance().getList());
-		return "admin/product/products";
+	public String Index(ModelMap model, HttpSession session) throws Exception {
+			model.addAttribute("list", DienThoaiDAO.getInstance().getList());
+			return "admin/product/products";
 	}
 
 	@RequestMapping(value = "/add-product", method = RequestMethod.GET)
@@ -59,19 +60,19 @@ public class DienThoaiController {
 		mv.addObject("listDM", DanhMucDAO.getInstance().getList());
 
 		if (hinhAnh == null || hinhAnh.isEmpty() || hinhAnh.toString().isEmpty()) {
-			mv.addObject("message", "Vui lòng chọn ảnh");
+			mv.addObject("message", "Vui lÃ²ng chá»�n áº£nh");
 		} else {
 			try {
-				// lưu Base64image
+				// lÆ°u Base64image
 				byte[] encode = java.util.Base64.getEncoder().encode(hinhAnh.getBytes());
 				model.setBase64image(new String(encode, "UTF-8"));
 			} catch (Exception e) {
-				mv.addObject("message", "Lỗi lưu file");
+				mv.addObject("message", "Lá»—i lÆ°u file");
 			}
 		}
 
 		if (err.hasErrors()) {
-			System.out.println("Lỗi thông tin");
+			System.out.println("Lá»—i thÃ´ng tin");
 		} else
 			try {
 				{
@@ -104,7 +105,7 @@ public class DienThoaiController {
 		mv.addObject("listNSX", NhaSanXuatDAO.getInstance().getList());
 		mv.addObject("listDM", DanhMucDAO.getInstance().getList());
 
-		// nếu không có ảnh thì lưu lại ảnh cũ
+		// náº¿u khÃ´ng cÃ³ áº£nh thÃ¬ lÆ°u láº¡i áº£nh cÅ©
 		if (hinhAnh == null || hinhAnh.isEmpty()) {
 			DienThoai dt = DienThoaiDAO.getInstance().getById(model.getMaDt());
 			model.setHinhAnh(dt.getHinhAnh());
@@ -112,17 +113,17 @@ public class DienThoaiController {
 			model.setBase64image(new String(encode, "UTF-8"));
 		} else {
 			try {
-				// lưu Base64image
+				// lÆ°u Base64image
 				model.setHinhAnh(hinhAnh.getBytes());
 				byte[] encode = java.util.Base64.getEncoder().encode(hinhAnh.getBytes());
 				model.setBase64image(new String(encode, "UTF-8"));
 			} catch (Exception e) {
-				mv.addObject("message", "Lỗi lưu file");
+				mv.addObject("message", "Lá»—i lÆ°u file");
 			}
 		}
 
 		if (err.hasErrors()) {
-			System.out.println("Lỗi thông tin");
+			System.out.println("Lá»—i thÃ´ng tin");
 		} else
 			try {
 

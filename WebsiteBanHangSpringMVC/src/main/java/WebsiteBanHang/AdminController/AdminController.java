@@ -1,14 +1,28 @@
 package WebsiteBanHang.AdminController;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import dao.DienThoaiDAO;
+import dao.GioHangDAO;
+import dao.KhachHangDAO;
+import dao.NhaSanXuatDAO;
+import pojo.KhachHang;
+import pojo.TaiKhoan;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
 
 	@RequestMapping(value = "")
-	public String Index() {
-		return "admin/index";
+	public ModelAndView Index(ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null)
+			return new ModelAndView("redirect:./");
+		else
+			return new ModelAndView("redirect:./login", "admin", new TaiKhoan());
 	}
 }
