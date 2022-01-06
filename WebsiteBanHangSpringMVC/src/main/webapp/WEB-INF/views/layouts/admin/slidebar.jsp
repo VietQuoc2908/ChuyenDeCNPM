@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
+<%
+if (session.getAttribute("taikhoanAdmin") != null){
+%>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 	<!-- Sidebar -->
@@ -45,3 +47,5 @@
 		<!-- /.sidebar-menu -->
 	</div>
 </aside>
+
+<% }%>

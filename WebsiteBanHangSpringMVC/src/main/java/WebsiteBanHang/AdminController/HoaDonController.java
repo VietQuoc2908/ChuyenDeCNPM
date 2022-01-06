@@ -3,6 +3,8 @@ package WebsiteBanHang.AdminController;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,16 +22,22 @@ import pojo.HoaDon;
 public class HoaDonController {
 
 	@RequestMapping(value = "")
-	public String Index(ModelMap model) throws Exception {
-		model.addAttribute("list", HoaDonDAO.getInstance().getList());
-		return "admin/order/orders";
+	public String Index(ModelMap model, HttpSession session) throws Exception {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			model.addAttribute("list", HoaDonDAO.getInstance().getList());
+			return "admin/order/orders";
+		}
+		return "redirect:./login";
 	}
 	
 	@RequestMapping(value = "/detail-order", method = RequestMethod.GET)
-	public String DetailOrder(@RequestParam("maHd") int maHd, ModelMap model) {
-		model.addAttribute("hoadon", HoaDonDAO.getInstance().getById(maHd));
-		model.addAttribute("chiTietHoaDon", ChiTietHoaDonDAO.getInstance().getListByMaHd(maHd));
-		return "admin/order/detail-order";
+	public String DetailOrder(@RequestParam("maHd") int maHd, ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			model.addAttribute("hoadon", HoaDonDAO.getInstance().getById(maHd));
+			model.addAttribute("chiTietHoaDon", ChiTietHoaDonDAO.getInstance().getListByMaHd(maHd));
+			return "admin/order/detail-order";
+		}
+		return "redirect:../login";
 	}
 	
 	@RequestMapping(value = "/confirm-order/{maHd}", method = RequestMethod.POST, produces = "application/json")

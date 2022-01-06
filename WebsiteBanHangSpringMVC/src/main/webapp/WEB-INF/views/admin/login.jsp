@@ -3,45 +3,68 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 
-<div class="product-big-title-area">
+<div id="login">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="product-bit-title text-center">
-					<h2>Đăng nhập</h2>
+		<div id="login-row"
+			class="row justify-content-center align-items-center">
+			<div id="login-column" class="col-md-6">
+				<div id="login-box" class="col-md-12">
+					<f:form modelAttribute="admin" method="post" id="login-form"
+						class="form">
+						<h3 class="text-center text-info">Đăng nhập</h3>
+						<div class="form-group">
+							<label class="text-info" for="taikhoan">Tên đăng nhập</label>
+							<f:input type="text" path="taikhoan" id="taikhoan"
+								class="form-control" />
+							<f:errors path="taikhoan" cssClass="text-danger" />
+
+
+						</div>
+						<div class="form-group">
+							<label for="matkhau" class="text-info">Mật khẩu</label>
+							<f:input type="password" path="matkhau" id="matkhau"
+								class="form-control" />
+							<f:errors path="matkhau" cssClass="text-danger" />
+
+
+						</div>
+						<div class="form-group">
+							<c:if test="${not empty error}">
+								<p class="text-danger">${error}</p>
+							</c:if>
+							<input type="submit" name="submit" class="btn btn-info btn-md"
+								value="submit">
+						</div>
+					</f:form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-6"></div>
 
-		<div class="col-md-6">
-			<f:form modelAttribute="admin" method="post">
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #17a2b8;
+	height: 100vh;
+}
 
-				<div class="form-group">
-					<label for="taikhoan">Tên đăng nhập</label>
-					<f:input type="text" path="taikhoan" id="taikhoan"
-						class="form-control" />
-					<f:errors path="taikhoan" cssClass="text-danger" />
-				</div>
+#login .container #login-row #login-column #login-box {
+	margin-top: 120px;
+	max-width: 600px;
+	height: 320px;
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
+}
 
-				<div class="form-group">
-					<label for="matkhau">Mật khẩu</label>
-					<f:input type="password" path="matkhau" id="matkhau"
-						class="form-control" />
-					<f:errors path="matkhau" cssClass="text-danger" />
-				</div>
-				<c:if test="${not empty error}">
-					<p class="text-danger">${error}</p>
-				</c:if>
-				<input type="submit" value="Đăng nhập"
-					class="btn btn-success float-right">
-			</f:form>
-		</div>
-	</div>
+#login .container #login-row #login-column #login-box #login-form {
+	padding: 20px;
+}
 
-</div>
+#login .container #login-row #login-column #login-box #login-form #register-link
+	{
+	margin-top: -85px;
+}
+</style>

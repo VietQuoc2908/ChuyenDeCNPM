@@ -78,6 +78,26 @@ public class TaiKhoanDAO {
 		return false;
 	}
 	
+	public boolean checkLoginAdmin(String taikhoan, String matkhau) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			Query q = ses.createQuery(
+					"from TaiKhoan n where n.phanQuyen.maQuyen=1 and n.taikhoan = '" + taikhoan + "' and n.matkhau = '" + matkhau + "'");
+			if (!q.getResultList().isEmpty()) {
+				ses.getTransaction().commit();
+				return true;
+			}
+			ses.getTransaction().commit();
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+		} finally {
+			ses.close();
+		}
+		return false;
+	}
+	
 	public TaiKhoan getById(String taikhoan) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();

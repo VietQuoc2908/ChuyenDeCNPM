@@ -4,7 +4,7 @@
 <hibernate-configuration>
  <session-factory>
   <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-  <property name="hibernate.connection.password">123456789</property>
+  <property name="hibernate.connection.password">123</property>
   <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433</property>
   <property name="hibernate.connection.username">sa</property>
   <property name="hibernate.default_catalog">DienThoaiSpringMVC</property>

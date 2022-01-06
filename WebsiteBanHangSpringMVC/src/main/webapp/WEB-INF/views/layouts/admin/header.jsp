@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
+<%
+if (session.getAttribute("taikhoanAdmin") != null){
+%>
 <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -18,3 +20,4 @@
       </li>
     </ul>
   </nav>
+<%} %>

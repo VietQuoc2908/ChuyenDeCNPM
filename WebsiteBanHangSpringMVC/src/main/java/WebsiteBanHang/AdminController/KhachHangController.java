@@ -22,7 +22,10 @@ public class KhachHangController {
 
 	@RequestMapping(value = "")
 	public String Index(@RequestParam("txtSearch") String txtSearch, ModelMap model, HttpSession session) throws Exception {
-		model.addAttribute("list", KhachHangDAO.getInstance().getListByText(txtSearch));
-		return "admin/customer/customers";
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			model.addAttribute("list", KhachHangDAO.getInstance().getListByText(txtSearch));
+			return "admin/customer/customers";
+		}
+		return "redirect:../login";
 	}
 }

@@ -41,7 +41,7 @@ public class AdminLoginController {
 		if (err.hasErrors()) {
 			System.out.println("Lỗi thông tin");
 		} else {
-			if (TaiKhoanDAO.getInstance().checkLogin(model.getTaikhoan(), model.getMatkhau())) {
+			if (TaiKhoanDAO.getInstance().checkLoginAdmin(model.getTaikhoan(), model.getMatkhau())) {
 				session.setAttribute("taikhoanAdmin", model.getTaikhoan());
 				return new ModelAndView("redirect:./orders");
 			} else {

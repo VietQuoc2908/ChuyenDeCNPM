@@ -37,20 +37,29 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping(value = "")
-	public ModelAndView Index(ModelMap model, HttpSession session) throws Exception {
+	public String Index(ModelMap model, HttpSession session) throws Exception {
+
+		String taikhoan = (String) session.getAttribute("taikhoanAdmin");
+		System.out.println(taikhoan);
 		if (session.getAttribute("taikhoanAdmin") != null) {
-			//model.addAttribute("list", DienThoaiDAO.getInstance().getList());
-			return new ModelAndView("admin/product/products", "list", DienThoaiDAO.getInstance().getList());
+			model.addAttribute("list", DienThoaiDAO.getInstance().getList());
+			return "admin/product/products";
+		}else {
+			
+			return "redirect:./login";
 		}
-		return new ModelAndView("redirect:../login", "admin", new TaiKhoan());
+		
 	}
 
 	@RequestMapping(value = "/add-product", method = RequestMethod.GET)
-	public String AddProduct(ModelMap model) {
-		model.addAttribute("dienthoai", new DienThoai());
-		model.addAttribute("listNSX", NhaSanXuatDAO.getInstance().getList());
-		model.addAttribute("listDM", DanhMucDAO.getInstance().getList());
-		return "admin/product/add-product";
+	public String AddProduct(ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			model.addAttribute("dienthoai", new DienThoai());
+			model.addAttribute("listNSX", NhaSanXuatDAO.getInstance().getList());
+			model.addAttribute("listDM", DanhMucDAO.getInstance().getList());
+			return "admin/product/add-product";
+		}
+		return "redirect:../login";
 	}
 
 	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
@@ -92,12 +101,15 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping(value = "/edit-product", method = RequestMethod.GET)
-	public String EditProduct(@RequestParam("maDt") int maDt, ModelMap model) {
-		DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
-		model.addAttribute("dienthoai", dt);
-		model.addAttribute("listNSX", NhaSanXuatDAO.getInstance().getList());
-		model.addAttribute("listDM", DanhMucDAO.getInstance().getList());
-		return "admin/product/edit-product";
+	public String EditProduct(@RequestParam("maDt") int maDt, ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
+			model.addAttribute("dienthoai", dt);
+			model.addAttribute("listNSX", NhaSanXuatDAO.getInstance().getList());
+			model.addAttribute("listDM", DanhMucDAO.getInstance().getList());
+			return "admin/product/edit-product";
+		}
+		return "redirect:../login";
 	}
 
 	@RequestMapping(value = "/edit-product", method = RequestMethod.POST)
@@ -158,9 +170,12 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping(value = "/detail-product", method = RequestMethod.GET)
-	public String DetailProduct(@RequestParam("maDt") int maDt, ModelMap model) {
-		DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
-		model.addAttribute("dienthoai", dt);
-		return "admin/product/detail-product";
+	public String DetailProduct(@RequestParam("maDt") int maDt, ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
+			model.addAttribute("dienthoai", dt);
+			return "admin/product/detail-product";
+		}
+		return "redirect:../login";
 	}
 }

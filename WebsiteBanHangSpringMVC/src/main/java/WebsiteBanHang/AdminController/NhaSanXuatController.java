@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -38,15 +39,21 @@ public class NhaSanXuatController {
 	}
 
 	@RequestMapping(value = "")
-	public String Index(ModelMap model) throws Exception {
-		model.addAttribute("list", NhaSanXuatDAO.getInstance().getList());
-		return "admin/manufactor/manufactores";
+	public String Index(ModelMap model, HttpSession session) throws Exception {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			model.addAttribute("list", NhaSanXuatDAO.getInstance().getList());
+			return "admin/manufactor/manufactores";
+		}
+		return "redirect:./login";
 	}
 
 	@RequestMapping(value = "/add-manufactor", method = RequestMethod.GET)
-	public String AddProduct(ModelMap model) {
-		model.addAttribute("nhasanxuat", new NhaSanXuat());
-		return "admin/manufactor/add-manufactor";
+	public String AddProduct(ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			model.addAttribute("nhasanxuat", new NhaSanXuat());
+			return "admin/manufactor/add-manufactor";
+		}
+		return "redirect:../login";
 	}
 
 	@RequestMapping(value = "/add-manufactor", method = RequestMethod.POST)
@@ -86,10 +93,13 @@ public class NhaSanXuatController {
 	}
 
 	@RequestMapping(value = "/edit-manufactor", method = RequestMethod.GET)
-	public String EditProduct(@RequestParam("maNsx") int maNsx, ModelMap model) {
-		NhaSanXuat nsx = NhaSanXuatDAO.getInstance().getById(maNsx);
-		model.addAttribute("nhasanxuat", nsx);
-		return "admin/manufactor/edit-manufactor";
+	public String EditProduct(@RequestParam("maNsx") int maNsx, ModelMap model, HttpSession session) {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			NhaSanXuat nsx = NhaSanXuatDAO.getInstance().getById(maNsx);
+			model.addAttribute("nhasanxuat", nsx);
+			return "admin/manufactor/edit-manufactor";
+		}
+		return "redirect:../login";
 	}
 
 	@RequestMapping(value = "/edit-manufactor", method = RequestMethod.POST)
