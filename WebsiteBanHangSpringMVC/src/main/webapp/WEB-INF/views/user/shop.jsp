@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
   <body>
     
     
@@ -22,7 +23,7 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-            <c:forEach items="${list}" var="item" varStatus="idx">
+            <c:forEach items="${listWithPage}" var="item" varStatus="idx">
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
@@ -40,7 +41,7 @@
                         </div>  
                         </c:if>
                         <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                            <a class="btn btn-info btnAddCart" data-id="${item.maDt}" data-name="<%=session.getAttribute("taikhoan") %>">Add to cart</a>
                         </div>                       
                     </div>
                 </div>
@@ -58,8 +59,8 @@
                               </a>
                             </li>
 
-                            <c:forEach items="${listWithPage}" var="item" varStatus="idx">
-                            <li><a href="./search?txtSearch=<%= request.getParameter("name") %>&pageid=${idx.index+1}">1</a></li>
+                            <c:forEach var="i" begin="0" end="${tongsotrang }" step="1">
+                            	<li><a href="./search?txtSearch=${name}&pageid=${i+1}">${i+1}</a></li>
                             </c:forEach>
                             <li>
                               <a href="#" aria-label="Next">

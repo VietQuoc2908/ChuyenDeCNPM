@@ -22,13 +22,27 @@ import pojo.HoaDon;
 public class HoaDonController {
 
 	@RequestMapping(value = "")
-	public String Index(ModelMap model, HttpSession session) throws Exception {
+	public String Index(ModelMap model, @RequestParam(value="pageid") int pageid, @RequestParam(value="txtSearch", required = false) String txtSearch, HttpSession session) throws Exception {
+		int total=10;    
+        if(pageid==1){}    
+        else{    
+            pageid=(pageid-1)*total+1;    
+        }
 		if (session.getAttribute("taikhoanAdmin") != null) {
-			model.addAttribute("list", HoaDonDAO.getInstance().getList());
+			if(txtSearch=="" || txtSearch==null || txtSearch.length()==0) {
+				model.addAttribute("list", HoaDonDAO.getInstance().getHoaDonByPageAdmin(pageid,total));
+				model.addAttribute("tongsotrang",HoaDonDAO.getInstance().getTotalPage(total));
+			}
+			else {
+				int maKh = Integer.parseInt(txtSearch);
+				model.addAttribute("list", HoaDonDAO.getInstance().getHoaDonByKHPageAdmin(pageid,total,maKh));
+				model.addAttribute("tongsotrang",HoaDonDAO.getInstance().getTotalPage(total));
+			}
 			return "admin/order/orders";
 		}
 		return "redirect:./login";
 	}
+	
 	
 	@RequestMapping(value = "/detail-order", method = RequestMethod.GET)
 	public String DetailOrder(@RequestParam("maHd") int maHd, ModelMap model, HttpSession session) {

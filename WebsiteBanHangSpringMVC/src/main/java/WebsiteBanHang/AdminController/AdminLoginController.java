@@ -43,7 +43,7 @@ public class AdminLoginController {
 		} else {
 			if (TaiKhoanDAO.getInstance().checkLoginAdmin(model.getTaikhoan(), model.getMatkhau())) {
 				session.setAttribute("taikhoanAdmin", model.getTaikhoan());
-				return new ModelAndView("redirect:./orders");
+				return new ModelAndView("redirect:./orders?pageid=1");
 			} else {
 				mv.addObject("error", "Sai tên đăng nhập hoặc mật khẩu");
 			}

@@ -21,9 +21,14 @@ import pojo.KhachHang;
 public class KhachHangController {
 
 	@RequestMapping(value = "")
-	public String Index(@RequestParam("txtSearch") String txtSearch, ModelMap model, HttpSession session) throws Exception {
+	public String Index(@RequestParam("txtSearch") String txtSearch, @RequestParam(value="pageid") int pageid, ModelMap model, HttpSession session) throws Exception {
+		int total=10;    
+        if(pageid==1){}    
+        else{    
+            pageid=(pageid-1)*total+1;    
+        }
 		if (session.getAttribute("taikhoanAdmin") != null) {
-			model.addAttribute("list", KhachHangDAO.getInstance().getListByText(txtSearch));
+			model.addAttribute("list", KhachHangDAO.getInstance().getKhachHangByPage(pageid,total,txtSearch));
 			return "admin/customer/customers";
 		}
 		return "redirect:../login";

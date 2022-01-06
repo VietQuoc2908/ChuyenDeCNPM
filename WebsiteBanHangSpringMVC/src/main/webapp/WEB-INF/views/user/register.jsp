@@ -17,7 +17,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6"></div>
+		<div class="col-md-3"></div>
 
 		<div class="col-md-6">
 			<h2>Đăng ký</h2>
@@ -52,6 +52,8 @@
 				<p style="line-height: 3.2; display: inline; float: right">Đã có tài khoản?<a href="./login"> Đăng nhập</a></p>
 			</f:form>
 		</div>
+		
+		<div class="col-md-3"></div>
 	</div>
 
 </div>

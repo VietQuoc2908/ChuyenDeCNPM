@@ -31,8 +31,9 @@
 						<div class="card-header">
 
 							<div class="card-tools">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<f:form method="get" class="navbar-form navbar-right" role="search">
+								 <f:form action="./customers" method="get">
+									<div class="input-group input-group-sm" style="width: 150px;">
+										<input name="pageid" style="display:none" value="1"/>
 										<input type="text" name="txtSearch"
 											class="form-control float-right" placeholder="Search">
 	
@@ -41,8 +42,8 @@
 												<i class="fas fa-search"></i>
 											</button>
 										</div>
-									</f:form>
-								</div>
+									</div>
+								</f:form>
 							</div>
 						</div>
 						<!-- /.card-header -->
@@ -70,6 +71,22 @@
 								</tbody>
 							</table>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="product-pagination text-center">
+						<nav>
+							<ul class="pagination">
+
+
+								<c:forEach var="i" begin="0" end="${tongsotrang }" step="1">
+									<li><a href="./orders?pageid=${i+1}">${i+1}</a></li>
+								</c:forEach>
+
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

@@ -91,4 +91,20 @@ public class KhachHangDAO {
 			ses.close();
 		}
 	}
+	
+	public List<KhachHang> getKhachHangByPage(int pageid, int total, String txtSearch){
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			List<KhachHang> list = ses.createQuery("from KhachHang where taikhoan like :txtSearch or tenKH like :txtSearch or sdt like :txtSearch or diachi like :txtSearch").setParameter("txtSearch", "%" + txtSearch + "%").setFirstResult(pageid-1).setMaxResults(total).list();
+			ses.getTransaction().commit();
+			return list;
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return new ArrayList<KhachHang>();
+		} finally {
+			ses.close();
+		}
+	}
 }

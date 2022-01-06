@@ -1,6 +1,7 @@
 package WebsiteBanHang.UserController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -28,7 +29,14 @@ import pojo.KhachHang;
 public class HistoryController {
 
 	@RequestMapping(value = "/history")
-	public String History(ModelMap model, HttpSession session) {
+	public String History(ModelMap model, @RequestParam(value="pageid") int pageid, HttpSession session) {
+		int total=8;    
+        if(pageid==1){}    
+        else{    
+            pageid=(pageid-1)*total+1;    
+        }
+		model.addAttribute("tongsotrang", HoaDonDAO.getInstance().getTotalPage(total));
+		
 		if (session.getAttribute("taikhoan") != null) {
 			String taikhoan = (String) session.getAttribute("taikhoan");
 			KhachHang kh = KhachHangDAO.getInstance().getByTaiKhoan(taikhoan);
@@ -38,7 +46,7 @@ public class HistoryController {
 			model.addAttribute("chiTietGH", ChiTietGioHangDAO.getInstance().getList(maGH));
 			model.addAttribute("khachhang",kh);
 			
-			model.addAttribute("hoadon", HoaDonDAO.getInstance().getHoaDonByKH(kh.getMaKh()));
+			model.addAttribute("hoadon", HoaDonDAO.getInstance().getHoaDonByPage(pageid, total,kh.getMaKh()));
 		}
 
 		return "user/history";

@@ -6,9 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,7 +55,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/shop", method = RequestMethod.GET)
-	public String Shop(@RequestParam("maNsx") int maNsx, ModelMap model, HttpSession session) {
+	public String Shop(@RequestParam(value="maNsx",required=false) int maNsx, ModelMap model, HttpSession session) {
 		model.addAttribute("list", DienThoaiDAO.getInstance().getListByNsx(maNsx));
 		if (session.getAttribute("taikhoan") != null) {
 			String taikhoan = (String) session.getAttribute("taikhoan");
@@ -118,7 +120,7 @@ public class UserController {
 			
 				
 				GioHangDAO.getInstance().resetGioHang(maGh);
-				return new ModelAndView("redirect:../products");
+				return new ModelAndView("redirect:./history?pageid=1");
 			}
 		}
 
@@ -196,14 +198,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String Search(@RequestParam("txtSearch") String txtSearch, @RequestParam("pageid") int pageid, ModelMap model, HttpSession session) {
-		model.addAttribute("list", DienThoaiDAO.getInstance().getListByText(txtSearch));
-		int total = 2;
-		if(pageid==1) {}
-		else {
-			pageid=(pageid-1)*total+1;
-		}
-		List<DienThoai> listWithPage = DienThoaiDAO.getInstance().getDienThoaiByPage(pageid, total);
+	public String Search(@RequestParam(value="txtSearch") String txtSearch, @RequestParam(value="pageid") int pageid, ModelMap model, HttpSession session) {
+		
+		int total=10;    
+        if(pageid==1){}    
+        else{    
+            pageid=(pageid-1)*total+1;    
+        }
+		List<DienThoai> listWithPage = DienThoaiDAO.getInstance().getDienThoaiByPage(pageid, total, txtSearch);
+		model.addAttribute("tongsotrang", DienThoaiDAO.getInstance().getTotalPage(total,txtSearch));
+		model.addAttribute("name",txtSearch);
 		model.addAttribute("listWithPage", listWithPage);
 		if (session.getAttribute("taikhoan") != null) {
 			String taikhoan = (String) session.getAttribute("taikhoan");

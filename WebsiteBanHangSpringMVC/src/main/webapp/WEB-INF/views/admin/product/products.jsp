@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -32,16 +33,19 @@
 							<h3 class="card-title"><a href="./products/add-product">Thêm mới</a></h3>
 
 							<div class="card-tools">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<input type="text" name="table_search"
-										class="form-control float-right" placeholder="Search">
-
-									<div class="input-group-append">
-										<button type="submit" class="btn btn-default">
-											<i class="fas fa-search"></i>
-										</button>
+								 <f:form action="./products" method="get">
+									<div class="input-group input-group-sm" style="width: 150px;">
+										<input name="pageid" style="display:none" value="1"/>
+										<input type="text" name="txtSearch"
+											class="form-control float-right" placeholder="Search">
+	
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-default">
+												<i class="fas fa-search"></i>
+											</button>
+										</div>
 									</div>
-								</div>
+								</f:form>
 							</div>
 						</div>
 						<!-- /.card-header -->
@@ -84,6 +88,22 @@
 								</tbody>
 							</table>
 						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="product-pagination text-center">
+						<nav>
+							<ul class="pagination">
+
+
+								<c:forEach var="i" begin="0" end="${tongsotrang }" step="1">
+									<li><a href="./products?txtSearch=${name}&pageid=${i+1}">${i+1}</a></li>
+								</c:forEach>
+
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

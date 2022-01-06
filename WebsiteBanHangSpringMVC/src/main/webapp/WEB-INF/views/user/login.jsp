@@ -17,9 +17,10 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6"></div>
+		<div class="col-md-3"></div>
 
 		<div class="col-md-6">
+		<h2>Đăng Nhập</h2>
 			<f:form modelAttribute="nguoidung" method="post">
 
 				<div class="form-group">
@@ -43,6 +44,7 @@
 				<p style="line-height: 3.2; display: inline; float: right">Chưa có tài khoản?<a href="./register"> Đăng ký</a></p>
 			</f:form>
 		</div>
+		<div class="col-md-3"></div>
 	</div>
 
 </div>

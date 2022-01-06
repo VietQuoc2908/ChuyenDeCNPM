@@ -25,10 +25,10 @@
 			<input type="hidden" name="maGh" value=${gioHang.maGh } />
 			<div class="row">
 				<div class="col-lg-4">
-
+					<h3>Thông tin tài khoản</h3>
 					<div class="form-group">
 						<label for="tenKh">Họ tên</label>
-						<input type="text" name="tenKh" id="tenKh" value="${khachhang.tenKh }" class="form-control" />
+						<input type="text" name="tenKh" id="tenKh" value="${khachhang.tenKh }" class="form-control" disabled/>
 						<c:if test="${not empty errorTen}">
 							<p class="text-danger">${errorTen}</p>
 						</c:if>
@@ -36,7 +36,7 @@
 
 					<div class="form-group">
 						<label for="sdt">Số điện thoại</label>
-						<input type="text" name="sdt" id="sdt" value="${khachhang.sdt }" class="form-control" />
+						<input type="text" name="sdt" id="sdt" value="${khachhang.sdt }" class="form-control" disabled/>
 						<c:if test="${not empty errorSdt}">
 							<p class="text-danger">${errorSdt}</p>
 						</c:if>
@@ -44,10 +44,13 @@
 
 					<div class="form-group">
 						<label for="diachi">Địa chỉ</label>
-						<input type="text" name="diachi" id="diachi" value="${khachhang.diachi }" class="form-control" />
+						<input type="text" name="diachi" id="diachi" value="${khachhang.diachi }" class="form-control" disabled/>
 						<c:if test="${not empty errorDc}">
 							<p class="text-danger">${errorDc}</p>
 						</c:if>
+					</div>
+					<div class="form-group text-center">
+						<a class="btn btn-primary" href="./account">Chỉnh sửa thông tin</a>
 					</div>
 
 

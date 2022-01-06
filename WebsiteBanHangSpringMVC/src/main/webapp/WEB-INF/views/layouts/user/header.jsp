@@ -18,7 +18,7 @@
 						<%}else{ %>
 						<li><a href="./account"><i class="fa fa-user"></i> Xin chào <%=session.getAttribute("taikhoan") %></a></li>
 						<li><a href="./cart"><i class="fa fa-user"></i> Giỏ hàng</a></li>
-						<li><a href="./history"><i class="fa fa-heart"></i> Lịch sử mua hàng</a></li>
+						<li><a href="./history?pageid=1"><i class="fa fa-heart"></i> Lịch sử mua hàng</a></li>
 						<%} %>
 					</ul>
 				</div>
@@ -80,13 +80,15 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="./index">Trang chủ</a></li>
-                        <li><a href="./search?txtSearch=">Điện thoại</a></li>
+                        <li><a href="./search?txtSearch=&pageid=1">Điện thoại</a></li>
+                        <%
+						if (session.getAttribute("taikhoan") != null){
+						%>
                         <li><a href="./cart">Giỏ hàng</a></li>
-                        <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
-                        
+                        <%} %>
                     </ul>
                     <f:form action="./search" method="get" class="navbar-form navbar-right" role="search">
+                    	<input name="pageid" style="display:none" value="1"/>
 				        <div class="form-group">
 				          <input type="text" name="txtSearch" class="form-control" placeholder="Tìm kiếm">
 				        </div>

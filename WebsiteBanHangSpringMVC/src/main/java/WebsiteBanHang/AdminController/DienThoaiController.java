@@ -37,15 +37,18 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping(value = "")
-	public String Index(ModelMap model, HttpSession session) throws Exception {
-
-		String taikhoan = (String) session.getAttribute("taikhoanAdmin");
-		System.out.println(taikhoan);
+	public String Index(ModelMap model, @RequestParam(value="pageid") int pageid, @RequestParam(value="txtSearch", required = false) String txtSearch, HttpSession session) throws Exception {
+		int total=10;    
+        if(pageid==1){}    
+        else{    
+            pageid=(pageid-1)*total+1;    
+        }
 		if (session.getAttribute("taikhoanAdmin") != null) {
-			model.addAttribute("list", DienThoaiDAO.getInstance().getList());
+			model.addAttribute("list", DienThoaiDAO.getInstance().getDienThoaiByPage(pageid,total,txtSearch));
+			model.addAttribute("name",txtSearch);
+			model.addAttribute("tongsotrang", DienThoaiDAO.getInstance().getTotalPage(total, txtSearch));
 			return "admin/product/products";
 		}else {
-			
 			return "redirect:./login";
 		}
 		

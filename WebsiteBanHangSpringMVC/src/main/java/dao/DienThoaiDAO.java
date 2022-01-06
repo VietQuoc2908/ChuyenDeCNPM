@@ -98,18 +98,33 @@ public class DienThoaiDAO {
 		}
 	}
 	
-	public List<DienThoai> getDienThoaiByPage(int pageid, int total){
+	public List<DienThoai> getDienThoaiByPage(int pageid, int total, String txtSearch){
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
 			ses.beginTransaction();
-			List<DienThoai> dt = ses.createQuery("from DienThoai").setFirstResult(pageid).setMaxResults(total).list();
-			
+			List<DienThoai> dt = ses.createQuery("from DienThoai where tenDt like :txtSearch").setParameter("txtSearch", "%" + txtSearch + "%").setFirstResult(pageid-1).setMaxResults(total).list();
 			ses.getTransaction().commit();
 			return dt;
 		} catch (Exception e) {
 			ses.getTransaction().rollback();
 			System.out.println(e);
 			return new ArrayList<DienThoai>();
+		} finally {
+			ses.close();
+		}
+	}
+	
+	public int getTotalPage(int total, String txtSearch) {
+		Session ses = HibernateUtil.getSessionFactory().openSession();
+		try {
+			ses.beginTransaction();
+			List<DienThoai> dt = ses.createQuery("from DienThoai where tenDt like :txtSearch").setParameter("txtSearch", "%" + txtSearch + "%").list();
+			ses.getTransaction().commit();
+			return dt.size()/total;
+		} catch (Exception e) {
+			ses.getTransaction().rollback();
+			System.out.println(e);
+			return 0;
 		} finally {
 			ses.close();
 		}
