@@ -37,9 +37,12 @@ public class DienThoaiController {
 	}
 
 	@RequestMapping(value = "")
-	public String Index(ModelMap model, HttpSession session) throws Exception {
-			model.addAttribute("list", DienThoaiDAO.getInstance().getList());
-			return "admin/product/products";
+	public ModelAndView Index(ModelMap model, HttpSession session) throws Exception {
+		if (session.getAttribute("taikhoanAdmin") != null) {
+			//model.addAttribute("list", DienThoaiDAO.getInstance().getList());
+			return new ModelAndView("admin/product/products", "list", DienThoaiDAO.getInstance().getList());
+		}
+		return new ModelAndView("redirect:../login", "admin", new TaiKhoan());
 	}
 
 	@RequestMapping(value = "/add-product", method = RequestMethod.GET)
