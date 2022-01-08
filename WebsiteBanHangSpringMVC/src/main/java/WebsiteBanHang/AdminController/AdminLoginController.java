@@ -18,6 +18,7 @@ import dao.TaiKhoanDAO;
 import pojo.TaiKhoan;
 import validator.TaiKhoanValidator;
 
+// controller đăng nhập
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminLoginController {
@@ -27,20 +28,23 @@ public class AdminLoginController {
 		binder.addValidators(new TaiKhoanValidator());
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
-	
+	// get trang login
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String Login(ModelMap model) {
+		// truyền model qua view
 		model.addAttribute("admin", new TaiKhoan());
 		return "admin/login";
 	}
-	
+	//post trang login
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView Login(@Valid @ModelAttribute("admin") TaiKhoan model, Errors err, HttpSession session) {
+	public ModelAndView Login(@Valid @ModelAttribute("nguoidung") TaiKhoan model, Errors err, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/admin/login");
-		mv.addObject("admin", model);
+		mv.addObject("nguoidung", model);
 		if (err.hasErrors()) {
 			System.out.println("Lỗi thông tin");
 		} else {
+			// kiểm tra tài khoản và mật khẩu của admin
+			// đúng thì trả về session và chuyển về trang đơn hàng
 			if (TaiKhoanDAO.getInstance().checkLoginAdmin(model.getTaikhoan(), model.getMatkhau())) {
 				session.setAttribute("taikhoanAdmin", model.getTaikhoan());
 				return new ModelAndView("redirect:./orders?pageid=1");

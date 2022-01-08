@@ -40,7 +40,7 @@ import pojo.KhachHang;
 @Controller
 @RequestMapping(value = "/")
 public class UserController {
-	
+	// get trang chủ trả về điện toại theo nhà sản xuất, theo danh mục và giỏ hàng
 	@RequestMapping(value = { "", "/index" })
 	public String Index(ModelMap model, HttpSession session) {
 		model.addAttribute("listNew", DienThoaiDAO.getInstance().getListByDm("Mới"));
@@ -65,6 +65,7 @@ public class UserController {
 		return "user/shop";
 	}
 
+	// get trang giỏ hàng trả về thông tin khách hàng, giỏ hàng, ci tiết giỏ hàng
 	@RequestMapping(value = "/cart")
 	public String Cart(ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoan") != null) {
@@ -74,12 +75,14 @@ public class UserController {
 
 			int maGH = GioHangDAO.getInstance().getGioHangByKH(kh.getMaKh()).getMaGh();
 			model.addAttribute("chiTietGH", ChiTietGioHangDAO.getInstance().getList(maGH));
-
+			return "user/cart";
 		}
 
-		return "user/cart";
+		return "redirect:./";
 	}
 
+	// get trang thanh toán
+	// trả về thông tin giỏ hàng, thông tin tài khoản
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String Checkout(ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoan") != null) {
@@ -91,10 +94,12 @@ public class UserController {
 			model.addAttribute("chiTietGH", ChiTietGioHangDAO.getInstance().getList(maGH));
 			model.addAttribute("khachhang",kh);
 			model.addAttribute("hoadon", new HoaDon());
+			return "user/checkout";
 		}
 
-		return "user/checkout";
+		return "redirect:./";
 	}
+	// post thanh toán
 	
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
 	public ModelAndView Checkout(@ModelAttribute("hoadon") HoaDon model, @RequestParam("maGh") int maGh, HttpSession session) throws IOException{
@@ -112,13 +117,15 @@ public class UserController {
 			model.setStatus(0);
 			model.setTongTien(gh.getTongGiaTien());
 			model.setHienThiTongTien(gh.getHienThiTongTien());
+			// thêm hoá đơn 
 			if(HoaDonDAO.getInstance().addHoaDon(model)) {
-				
+				// thêm chi tiết hoá đơn vào hoá đơn
 				ChiTietHoaDonDAO.getInstance().insertListCTHD(ChiTietGioHangDAO.getInstance().getList(maGh));
 				mv.addObject("message","Đặt hàng thành công");
 				
-			
-				
+				//cập nhật lại số lượng tồn kho
+				DienThoaiDAO.getInstance().updatetonKho(maGh);
+				// cập nhật lại giỏ hàng: xoá chi tiết giỏ hàng và tổng tiền =0
 				GioHangDAO.getInstance().resetGioHang(maGh);
 				return new ModelAndView("redirect:./history?pageid=1");
 			}
@@ -127,7 +134,7 @@ public class UserController {
 		return mv;
 	}
 	
-
+	// get trang điện thoại theo mã điện thoại
 	@RequestMapping(value = "/single-product", method = RequestMethod.GET)
 	public String SingleProduct(@RequestParam("maDt") int maDt, ModelMap model, HttpSession session) {
 		DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
@@ -140,7 +147,7 @@ public class UserController {
 		return "user/single-product";
 	}
 	
-	
+	// get trang thông tin tài khoản
 	@RequestMapping(value = "/account")
 	public String Account(ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoan") != null) {
@@ -151,12 +158,14 @@ public class UserController {
 			int maGH = GioHangDAO.getInstance().getGioHangByKH(kh.getMaKh()).getMaGh();
 			model.addAttribute("chiTietGH", ChiTietGioHangDAO.getInstance().getList(maGH));
 			model.addAttribute("khachhang",kh);
-
+			return "user/account";
 		}
 
-		return "user/account";
+		return "redirect:./";
 	}
 
+	//post tài khoản
+	//cập nhật lại thông tin như tên, sđt, địa chỉ
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
 	public ModelAndView Account(@Valid @ModelAttribute("khachhang") KhachHang model, @RequestParam("taikhoan") String taikhoan, @RequestParam("maKh") int maKh, Errors err, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/user/account");
@@ -180,6 +189,7 @@ public class UserController {
 		return mv;
 	}
 	
+	// get trang chi tiết đơn hàng, trả về chi tiết hoá đơn, 
 	@RequestMapping(value = "/detail-hoadon")
 	public String DetailHoaDon(ModelMap model, @RequestParam("maHd") int maHd ,HttpSession session) {
 		if (session.getAttribute("taikhoan") != null) {
@@ -192,11 +202,13 @@ public class UserController {
 			model.addAttribute("khachhang",kh);
 			model.addAttribute("hoadon",HoaDonDAO.getInstance().getById(maHd));
 			model.addAttribute("chiTietHoadon", ChiTietHoaDonDAO.getInstance().getListByMaHd(maHd));
+			return "user/detail-hoadon";
 		}
 
-		return "user/detail-hoadon";
+		return "redirect:./";
 	}
 
+	// tìm kiếm theo text
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String Search(@RequestParam(value="txtSearch") String txtSearch, @RequestParam(value="pageid") int pageid, ModelMap model, HttpSession session) {
 		

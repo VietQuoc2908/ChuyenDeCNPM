@@ -27,6 +27,7 @@ public class KhachHangDAO {
 		return instance;
 	}
 	
+	// lấy ra danh sách khách hàng
 	public List<KhachHang> getList() {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -43,6 +44,8 @@ public class KhachHangDAO {
 		}
 	}
 
+	// lấy ra khách hàng theo tài khoản đăng nhập
+	// dùng lấy ra để hiển thị tên sđt và địa chỉ
 	public KhachHang getByTaiKhoan(String taikhoan) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -58,6 +61,7 @@ public class KhachHangDAO {
 		return new KhachHang();
 	}
 	
+	// cập nhật lại thông tin khách hàng
 	@Transactional
 	public boolean updateKhachHang(KhachHang kh) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -75,6 +79,7 @@ public class KhachHangDAO {
 		}
 	}
 	
+	// Lấy ra danh sách khách hàng theo tìm kiếm của admin
 	public List<KhachHang> getListByText(String txtSearch) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -92,6 +97,7 @@ public class KhachHangDAO {
 		}
 	}
 	
+	// Lấy ra danh sách khách hàng có phân trang và tìm kiếm của admin
 	public List<KhachHang> getKhachHangByPage(int pageid, int total, String txtSearch){
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {

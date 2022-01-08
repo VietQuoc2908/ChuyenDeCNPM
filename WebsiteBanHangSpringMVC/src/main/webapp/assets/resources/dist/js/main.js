@@ -13,14 +13,22 @@ $(document).ready(function() {
 				url: './products/delete-product/' + maDt,
 				method: "post",
 				success: function(data) {
-					if (data.isvalid) {
-						atag.closest('tr').remove();
-						alert("Xoá thành công");
+					console.log(data);
+					if(data.tontaima=="true"){
+						alert("Hiện tại không thể xoá vì khách hàng đã mua điện thoại trong giỏ hàng");
 						return;
+					}else if(data.tontaima=="false"){
+						if (data.isvalid=="true") {
+							atag.closest('tr').remove();
+							alert("Xoá thành công");
+							return;
+						}
+						else {
+							alert("Xoá không thành công");
+							return;
+						}
 					}
-					else {
-						alert("Xoá không thành công");
-					}
+					
 
 				},
 				failed: function() {
@@ -45,15 +53,19 @@ $(document).ready(function() {
 				url: './manufactores/delete-manufactor/' + maNsx,
 				method: "post",
 				success: function(data) {
-					if (data.isvalid) {
-						atag.closest('tr').remove();
-						alert("Xoá thành công");
+					if(data.tontaima=="true"){
+						alert("Hiện tại không thể xoá vì có điện thoại thuộc nhà sản xuất này!");
 						return;
+					}else{
+						if (data.isvalid) {
+							atag.closest('tr').remove();
+							alert("Xoá thành công");
+							return;
+						}
+						else {
+							alert("Xoá không thành công");
+						}
 					}
-					else {
-						alert("Xoá không thành công");
-					}
-
 				},
 				failed: function() {
 

@@ -20,6 +20,9 @@ public class PhanQuyenDAO {
 		return instance;
 	}
 
+	// lấy ra phân quyền theo mã quyền
+	// Sau khi khách hàng đăng kí vào hệ thống thì phân quyền sẽ được đặt là khách hàng. 
+	//Dùng để kiểm tra session đăng nhập vào hệ thống của admin
 	public PhanQuyen roleKH(int maQuyen) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();

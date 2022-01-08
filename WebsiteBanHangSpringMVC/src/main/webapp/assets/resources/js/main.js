@@ -124,14 +124,20 @@ $(document).ready(function() {
 						alert("Sản phẩm đã có trong giỏ hàng");
 						return;
 					}else{
-						if (data.isvalid) {
-							alert("Thêm sản phẩm thành công");
+						if(data.notenough=="true"){
+							alert("Số lượng trong kho không đủ");
 							return;
+						}else{
+							if (data.isvalid) {
+								alert("Thêm sản phẩm thành công");
+								return;
+							}
+							else {
+								alert("error");
+								return;
+							}
 						}
-						else {
-							alert("error");
-							return;
-						}
+						
 					}
 					
 
@@ -197,13 +203,13 @@ $(document).ready(function() {
 		if(soluong>1){
 			if(op=="minus"){
 				soluong-=1;
-				$('#'+maCtgh+'_soluong').val(soluong);
+				//$('#'+maCtgh+'_soluong').val(soluong);
 			}
 		}
 		if(soluong>=1){
 			if(op=="plus"){
 				soluong+=1;
-				$('#'+maCtgh+'_soluong').val(soluong);
+				//$('#'+maCtgh+'_soluong').val(soluong);
 			}
 		}
 		
@@ -212,10 +218,14 @@ $(document).ready(function() {
 				url: './cart/update-product/'+maCtgh+'/' + soluong+'/'+taikhoan,
 				method: "post",
 				success: function(data) {
+					if(data.notenough){
+						alert("Số lượng tồn kho không đủ");
+					}
 					if(data.isvalid){
 						$('#giohang').text(data.hienThiTongTienGH);
 						$('#'+maCtgh+'_amount').text(data.hienThiThanhTienCTGH);
 						$('#amount').text(data.hienThiTongTienGH);
+						$('#'+maCtgh+'_soluong').val(soluong);
 					}
 
 				},

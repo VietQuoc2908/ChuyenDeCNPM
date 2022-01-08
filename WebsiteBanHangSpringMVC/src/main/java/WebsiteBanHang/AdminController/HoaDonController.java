@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dao.ChiTietHoaDonDAO;
+import dao.DienThoaiDAO;
 import dao.HoaDonDAO;
 import pojo.HoaDon;
 
@@ -21,8 +22,10 @@ import pojo.HoaDon;
 @RequestMapping("/admin/orders")
 public class HoaDonController {
 
+	// get trang hoá đơn
 	@RequestMapping(value = "")
 	public String Index(ModelMap model, @RequestParam(value="pageid") int pageid, @RequestParam(value="txtSearch", required = false) String txtSearch, HttpSession session) throws Exception {
+		// pageid là số thứ tự trang, total là tổng số dòng trong trang
 		int total=10;    
         if(pageid==1){}    
         else{    
@@ -40,10 +43,10 @@ public class HoaDonController {
 			}
 			return "admin/order/orders";
 		}
-		return "redirect:./login";
+		return "redirect:../login";
 	}
 	
-	
+	// get trang chi tiết hoá đơn
 	@RequestMapping(value = "/detail-order", method = RequestMethod.GET)
 	public String DetailOrder(@RequestParam("maHd") int maHd, ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoanAdmin") != null) {
@@ -51,9 +54,9 @@ public class HoaDonController {
 			model.addAttribute("chiTietHoaDon", ChiTietHoaDonDAO.getInstance().getListByMaHd(maHd));
 			return "admin/order/detail-order";
 		}
-		return "redirect:../login";
+		return "redirect:../../login";
 	}
-	
+	// sử dụng ajax gửi lên xác nhận hoá đơn
 	@RequestMapping(value = "/confirm-order/{maHd}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, String> ConfirmOrder(@PathVariable("maHd") int maHd, ModelMap model) {
@@ -71,6 +74,7 @@ public class HoaDonController {
 		return map;
 	}
 	
+	// sử dụng ajax để gủi lên đã nhận đơn 
 	@RequestMapping(value = "/received-order/{maHd}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, String> ReceivedOrder(@PathVariable("maHd") int maHd, ModelMap model) {
@@ -88,6 +92,7 @@ public class HoaDonController {
 		return map;
 	}
 	
+	// sử dụng ajax gửi lên uỷ hoá đơn
 	@RequestMapping(value = "/cancel-order/{maHd}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, String> CancelOrder(@PathVariable("maHd") int maHd, ModelMap model) {
@@ -98,6 +103,7 @@ public class HoaDonController {
 
 			hd.setStatus(3);
 			HoaDonDAO.getInstance().updateStatus(hd);
+			DienThoaiDAO.getInstance().updatetonKhoHuyDon(maHd);
 			map.put("isvalid", "true");
 			return map;
 		}

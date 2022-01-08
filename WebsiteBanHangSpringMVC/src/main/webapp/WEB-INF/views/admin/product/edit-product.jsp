@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="../">Trang chủ</a></li>
+						<li class="breadcrumb-item">Trang chủ</li>
 						<li class="breadcrumb-item"><a href="../products?txtSearch=&pageid=1">Sản phẩm</a></li>
 						<li class="breadcrumb-item active">Chỉnh sửa sản phẩm</li>
 					</ol>
@@ -140,7 +140,7 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<a href="../products" class="btn btn-secondary">Quay lại</a> 
+				<a href="../products?txtSearch=&pageid=1" class="btn btn-secondary">Quay lại</a> 
 				<input type="submit" value="Cập nhật" class="btn btn-success float-right">
 			</div>
 		</div>

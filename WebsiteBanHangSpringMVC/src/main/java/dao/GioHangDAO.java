@@ -16,6 +16,7 @@ import utils.HibernateUtil;
 
 public class GioHangDAO {
 
+	// sử dụng singleton để truy vấn đến lớp
 	private static GioHangDAO instance;
 
 	private GioHangDAO() {
@@ -27,6 +28,8 @@ public class GioHangDAO {
 		return instance;
 	}
 
+	// lấy ra giỏ àng của khách hàng
+	// để hiển thị tổng tiền giỏ hàng
 	public GioHang getGioHangByKH(int maKH) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -42,6 +45,7 @@ public class GioHangDAO {
 		return new GioHang();
 	}
 
+	// cập nhật tổng tiền lại giỏ hàng sau khi thêm điện thoại, thêm số lượng, hoặc xoá điện thoại
 	public void updateTongTien(GioHang gh) {
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -62,7 +66,7 @@ public class GioHangDAO {
 			ses.close();
 		}
 	}
-	
+	// lấy ra giỏ hàng theo mã giỏ hàng
 	public GioHang getById(int id) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -77,6 +81,7 @@ public class GioHangDAO {
 		return new GioHang();
 	}
 
+	// giỏ hàng sẽ được cập nhật thành tiền bằng 0 và tất cả các chi tiết giỏ hàng theo mã giỏ hàng sẽ được xoá.
 	public void resetGioHang(int maGh) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();

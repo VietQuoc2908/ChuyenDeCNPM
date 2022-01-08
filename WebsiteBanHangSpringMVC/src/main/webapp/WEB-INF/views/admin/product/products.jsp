@@ -14,7 +14,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+						<li class="breadcrumb-item">Trang chủ</li>
 						<li class="breadcrumb-item active">Quản lý sản phẩm</li>
 					</ol>
 				</div>
@@ -94,16 +94,14 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="product-pagination text-center">
-						<nav>
 							<ul class="pagination">
 
 
 								<c:forEach var="i" begin="0" end="${tongsotrang }" step="1">
-									<li><a href="./products?txtSearch=${name}&pageid=${i+1}">${i+1}</a></li>
+									<li style="margin-right:8px"><a href="./products?txtSearch=${name}&pageid=${i+1}">${i+1}</a></li>
 								</c:forEach>
 
 							</ul>
-						</nav>
 					</div>
 				</div>
 			</div>

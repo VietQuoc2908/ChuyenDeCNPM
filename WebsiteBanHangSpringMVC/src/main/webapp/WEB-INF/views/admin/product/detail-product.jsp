@@ -14,7 +14,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="../">Trang chủ</a></li>
+						<li class="breadcrumb-item">Trang chủ</li>
 						<li class="breadcrumb-item"><a href="../products?txtSearch=&pageid=1">Sản phẩm</a></li>
 						<li class="breadcrumb-item active">Chi tiết sản phẩm</li>
 					</ol>
@@ -96,7 +96,7 @@
 							</tbody>
 						</table>
 						<div class="mt-4">
-								<a class="btn btn-secondary" href="../products">Quay lại</a>
+								<a class="btn btn-secondary" href="../products?txtSearch=&pageid=1">Quay lại</a>
 
 								<a class="btn btn-success" href="../products/edit-product?maDt=${dienthoai.maDt}">Chỉnh sửa</a>
 						</div>

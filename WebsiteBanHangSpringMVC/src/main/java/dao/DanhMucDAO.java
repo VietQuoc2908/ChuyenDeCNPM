@@ -12,7 +12,7 @@ import pojo.DanhMuc;
 import utils.HibernateUtil;
 
 public class DanhMucDAO {
-
+	// sử dụng singleton để truy vấn đến lớp
 	private static DanhMucDAO instance;
 
 	private DanhMucDAO() {
@@ -24,6 +24,7 @@ public class DanhMucDAO {
 		return instance;
 	}
 
+	// lấy ra danh sách danh mục
 	@Transactional
 	public List<DanhMuc> getList() {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -41,6 +42,7 @@ public class DanhMucDAO {
 		}
 	}
 
+	// thêm danh mục
 	@Transactional
 	public static boolean add(DanhMuc dm) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -58,6 +60,7 @@ public class DanhMucDAO {
 		}
 	}
 
+	// chỉnh sửa danh mục
 	@Transactional
 	public boolean edit(DanhMuc dm) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -75,6 +78,7 @@ public class DanhMucDAO {
 		}
 	}
 
+	//xoá danh mục
 	@Transactional
 	public boolean delete(DanhMuc dm) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -92,6 +96,7 @@ public class DanhMucDAO {
 		}
 	}
 
+	// lấy ra danh mục theo mã
 	@Transactional
 	public DanhMuc getByID(int id) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();

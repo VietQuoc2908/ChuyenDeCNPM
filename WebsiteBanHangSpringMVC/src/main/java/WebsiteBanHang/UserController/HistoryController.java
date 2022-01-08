@@ -28,15 +28,17 @@ import pojo.KhachHang;
 @RequestMapping(value = "/")
 public class HistoryController {
 
+	// get trang lịch sử mua hàng
 	@RequestMapping(value = "/history")
 	public String History(ModelMap model, @RequestParam(value="pageid") int pageid, HttpSession session) {
+		// phân trang
 		int total=8;    
         if(pageid==1){}    
         else{    
             pageid=(pageid-1)*total+1;    
         }
 		model.addAttribute("tongsotrang", HoaDonDAO.getInstance().getTotalPage(total));
-		
+		// kiểm tra có session thì trả về giỏ hàng, chi tiêt giỏ hàng, khách hàng và hoá đơn.
 		if (session.getAttribute("taikhoan") != null) {
 			String taikhoan = (String) session.getAttribute("taikhoan");
 			KhachHang kh = KhachHangDAO.getInstance().getByTaiKhoan(taikhoan);
@@ -47,11 +49,13 @@ public class HistoryController {
 			model.addAttribute("khachhang",kh);
 			
 			model.addAttribute("hoadon", HoaDonDAO.getInstance().getHoaDonByPage(pageid, total,kh.getMaKh()));
+			return "user/history";
 		}
 
-		return "user/history";
+		return "redirect:./";
 	}
 	
+	// ajax huỷ đơn hàng 
 	@RequestMapping(value = "/history/cancel-invoice/{maHd}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, String> CancelInvoice(@PathVariable("maHd") int maHd, ModelMap model) {
@@ -62,13 +66,14 @@ public class HistoryController {
 
 			hd.setStatus(3);
 			HoaDonDAO.getInstance().updateStatus(hd);
+			DienThoaiDAO.getInstance().updatetonKhoHuyDon(maHd);
 			map.put("isvalid", "true");
 			return map;
 		}
 		map.put("isvalid", "false");
 		return map;
 	}
-	
+	// ajax đã nhận đơn hàng
 	@RequestMapping(value = "/history/received-invoice/{maHd}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, String> ReceivedInvoice(@PathVariable("maHd") int maHd, ModelMap model) {

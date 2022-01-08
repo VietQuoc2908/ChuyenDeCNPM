@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+						<li class="breadcrumb-item">Trang chủ</li>
 						<li class="breadcrumb-item active">Danh sách khách hàng</li>
 					</ol>
 				</div>
@@ -82,7 +82,7 @@
 
 
 								<c:forEach var="i" begin="0" end="${tongsotrang }" step="1">
-									<li><a href="./orders?pageid=${i+1}">${i+1}</a></li>
+									<li style="margin-right:8px"><a href="./orders?pageid=${i+1}">${i+1}</a></li>
 								</c:forEach>
 
 							</ul>

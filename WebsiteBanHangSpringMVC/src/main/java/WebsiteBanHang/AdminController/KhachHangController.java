@@ -20,8 +20,10 @@ import pojo.KhachHang;
 @RequestMapping("/admin/customers")
 public class KhachHangController {
 
+	// get trang khách hàng
 	@RequestMapping(value = "")
 	public String Index(@RequestParam("txtSearch") String txtSearch, @RequestParam(value="pageid") int pageid, ModelMap model, HttpSession session) throws Exception {
+		// pageid là số thứ tự trang, total là tổng số dòng trong trang
 		int total=10;    
         if(pageid==1){}    
         else{    

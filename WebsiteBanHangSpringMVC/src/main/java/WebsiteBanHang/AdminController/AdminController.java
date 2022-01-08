@@ -18,11 +18,13 @@ import pojo.TaiKhoan;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
+	
 	@RequestMapping(value = "")
 	public ModelAndView Index(ModelMap model, HttpSession session) {
+		// Nếu chưa có session thì sẽ về login, ngược lại về trang chủ
 		if (session.getAttribute("taikhoanAdmin") != null)
 			return new ModelAndView("redirect:./");
 		else
-			return new ModelAndView("redirect:./login", "admin", new TaiKhoan());
+			return new ModelAndView("redirect:../login", "admin", new TaiKhoan());
 	}
 }

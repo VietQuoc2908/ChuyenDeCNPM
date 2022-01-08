@@ -29,6 +29,7 @@ public class HoaDonDAO {
 		return instance;
 	}
 
+	// thêm hoá đơn
 	@Transactional
 	public boolean addHoaDon(HoaDon hd) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
@@ -45,7 +46,7 @@ public class HoaDonDAO {
 			ses.close();
 		}
 	}
-	
+	// lấy ra danh sách hoá đơn
 	public List<HoaDon> getList() {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -61,7 +62,9 @@ public class HoaDonDAO {
 			ses.close();
 		}
 	}
-	
+	// lấy ra hoá đơn có id cuối cùng
+	// sau khi giỏ hàng được reset ta sẽ tạo hoá đơn mới và hoá đơn này có mã cuối cùng
+	// dùng để thêm các chi tiết giỏ hàng vào chi tiết hoá đơn
 	public HoaDon getLastId() {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -77,6 +80,7 @@ public class HoaDonDAO {
 		return new HoaDon();
 	}
 	
+	//lấy ra danh sách hoa đơn theo mã khách hàng
 	public List<HoaDon> getHoaDonByKH(int maKH) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -91,7 +95,7 @@ public class HoaDonDAO {
 		}
 		return new ArrayList<HoaDon>();
 	}
-	
+	// lấy ra hoá đơn theo mã
 	public HoaDon getById(int maHd) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -106,6 +110,7 @@ public class HoaDonDAO {
 		return new HoaDon();
 	}
 	
+	// cập nhật trạng thái hoá đơn vd: huỷ, xác nhận, đã giao...
 	public boolean updateStatus(HoaDon hd) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -122,7 +127,8 @@ public class HoaDonDAO {
 		}
 	}
 	
-	
+	// lấy ra danh sách hoá đơn theo trang của khách hàng
+	// áp dụng trong chức năng phân trang
 	public List<HoaDon> getHoaDonByPage(int pageid, int total, int maKH){
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -139,6 +145,8 @@ public class HoaDonDAO {
 		}
 	}
 	
+	// lấy ra danh sách hoá đơn theo trang của admin
+	// áp dụng trong chức năng phân trang
 	public List<HoaDon> getHoaDonByPageAdmin(int pageid, int total){
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -155,6 +163,7 @@ public class HoaDonDAO {
 		}
 	}
 	
+	// Lấy ra danh sách hoá đơn nếu như admin tìm kiếm theo ma kách hàng và áp dụng phân trang.
 	public List<HoaDon> getHoaDonByKHPageAdmin(int pageid, int total, int maKH) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		ses.getTransaction().begin();
@@ -170,6 +179,7 @@ public class HoaDonDAO {
 		return new ArrayList<HoaDon>();
 	}
 	
+	// lấy ra tổng số trang khi có phân trang
 	public int getTotalPage(int total) {
 		Session ses = HibernateUtil.getSessionFactory().openSession();
 		try {

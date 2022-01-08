@@ -38,24 +38,27 @@ public class NhaSanXuatController {
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
 
+	// get trang nhà sản xuất
 	@RequestMapping(value = "")
 	public String Index(ModelMap model, HttpSession session) throws Exception {
 		if (session.getAttribute("taikhoanAdmin") != null) {
 			model.addAttribute("list", NhaSanXuatDAO.getInstance().getList());
 			return "admin/manufactor/manufactores";
 		}
-		return "redirect:./login";
+		return "redirect:../login";
 	}
 
+	// get trang thêm nhà sản xuất
 	@RequestMapping(value = "/add-manufactor", method = RequestMethod.GET)
 	public String AddProduct(ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoanAdmin") != null) {
 			model.addAttribute("nhasanxuat", new NhaSanXuat());
 			return "admin/manufactor/add-manufactor";
 		}
-		return "redirect:../login";
+		return "redirect:../../login";
 	}
 
+	// post trang thêm nhà sản xuất
 	@RequestMapping(value = "/add-manufactor", method = RequestMethod.POST)
 	public ModelAndView AddProduct(@Valid @ModelAttribute("nhasanxuat") NhaSanXuat model, Errors err,
 			@RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException {
@@ -92,6 +95,7 @@ public class NhaSanXuatController {
 		return mv;
 	}
 
+	// get trang sửa nhà sản xuất
 	@RequestMapping(value = "/edit-manufactor", method = RequestMethod.GET)
 	public String EditProduct(@RequestParam("maNsx") int maNsx, ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoanAdmin") != null) {
@@ -99,9 +103,10 @@ public class NhaSanXuatController {
 			model.addAttribute("nhasanxuat", nsx);
 			return "admin/manufactor/edit-manufactor";
 		}
-		return "redirect:../login";
+		return "redirect:../../login";
 	}
 
+	// post trang sửa nhà sản xuất
 	@RequestMapping(value = "/edit-manufactor", method = RequestMethod.POST)
 	public ModelAndView EditProduct(@Valid @ModelAttribute("nhasanxuat") NhaSanXuat model, Errors err,
 			@RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException {
@@ -142,6 +147,7 @@ public class NhaSanXuatController {
 		return mv;
 	}
 
+	// ajax gửi lên xoá nhà sản xuất
 	@RequestMapping(value = "/delete-manufactor/{maNsx}", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public Map<String, String> DeleteProduct(@PathVariable("maNsx") int maNsx, ModelMap model) {
@@ -149,9 +155,16 @@ public class NhaSanXuatController {
 		NhaSanXuat nsx = NhaSanXuatDAO.getInstance().getById(maNsx);
 
 		if (nsx != null) {
-			NhaSanXuatDAO.getInstance().delete(maNsx);
-			map.put("isvalid", "true");
-			return map;
+			if(NhaSanXuatDAO.getInstance().tontaima(maNsx)) {
+				map.put("tontaima", "true");
+				return map;
+			}else {
+				NhaSanXuatDAO.getInstance().delete(maNsx);
+				map.put("tontaima", "false");
+				map.put("isvalid", "true");
+				return map;
+			}
+			
 		}
 		map.put("isvalid", "false");
 		return map;

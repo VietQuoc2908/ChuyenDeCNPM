@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+						<li class="breadcrumb-item">Trang chủ</li>
 						<li class="breadcrumb-item active">Quản lý đơn hàng</li>
 					</ol>
 				</div>
@@ -55,7 +55,6 @@
 										<th>Mã hóa đơn</th>
 										<th>Mã khách hàng</th>
 										<th>Trạng thái</th>
-										<th>Tổng tiền</th>
 										<th>Hiển thị tổng tiền</th>
 										<th></th>
 									</tr>
@@ -83,7 +82,6 @@
 													<td style="color: red">Đã hủy</td>
 												</c:otherwise>
 											</c:choose>
-											<td>${item.tongTien}</td>
 											<td>${item.hienThiTongTien}</td>
 											<td class="project-actions text-right"><a
 												class="btn btn-primary btn-sm" type="button"
@@ -130,7 +128,7 @@
 
 
 								<c:forEach var="i" begin="0" end="${tongsotrang }" step="1">
-									<li><a href="./orders?pageid=${i+1}">${i+1}</a></li>
+									<li style="margin-right:8px"><a href="./orders?pageid=${i+1}">${i+1}</a></li>
 								</c:forEach>
 
 							</ul>

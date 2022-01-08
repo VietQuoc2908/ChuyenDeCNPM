@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shop</h2>
+                        <h2>Mua sắm</h2>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,12 @@
                         </div>  
                         </c:if>
                         <div class="product-option-shop">
-                            <a class="btn btn-info btnAddCart" data-id="${item.maDt}" data-name="<%=session.getAttribute("taikhoan") %>">Add to cart</a>
+                        	<c:if test="${item.tonKho == 0}">
+                        	<a class="btn btn-info">Hết hàng</a>
+                        	</c:if>
+                        	<c:if test="${item.tonKho != 0}">
+                            <a class="btn btn-info btnAddCart" data-id="${item.maDt}" data-name="<%=session.getAttribute("taikhoan") %>">Thêm vào giỏ</a>
+                        	</c:if>
                         </div>                       
                     </div>
                 </div>

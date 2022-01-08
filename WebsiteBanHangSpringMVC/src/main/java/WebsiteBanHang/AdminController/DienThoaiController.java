@@ -33,12 +33,15 @@ public class DienThoaiController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new DienThoaiValidator());
+		// dùng để lưu hình ảnh dạng byte
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
 
+	// get danh sách điện thoại
 	@RequestMapping(value = "")
 	public String Index(ModelMap model, @RequestParam(value="pageid") int pageid, @RequestParam(value="txtSearch", required = false) String txtSearch, HttpSession session) throws Exception {
-		int total=10;    
+		// pageid là số thứ tự trang, total là tổng số dòng trong trang
+		int total=10;
         if(pageid==1){}    
         else{    
             pageid=(pageid-1)*total+1;    
@@ -49,11 +52,12 @@ public class DienThoaiController {
 			model.addAttribute("tongsotrang", DienThoaiDAO.getInstance().getTotalPage(total, txtSearch));
 			return "admin/product/products";
 		}else {
-			return "redirect:./login";
+			return "redirect:../login";
 		}
 		
 	}
 
+	// get trang thêm sản phẩm
 	@RequestMapping(value = "/add-product", method = RequestMethod.GET)
 	public String AddProduct(ModelMap model, HttpSession session) {
 		if (session.getAttribute("taikhoanAdmin") != null) {
@@ -62,12 +66,14 @@ public class DienThoaiController {
 			model.addAttribute("listDM", DanhMucDAO.getInstance().getList());
 			return "admin/product/add-product";
 		}
-		return "redirect:../login";
+		return "redirect:../../login";
 	}
 
+	// post thêm sản phẩm
 	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
 	public ModelAndView AddProduct(@Valid @ModelAttribute("dienthoai") DienThoai model, Errors err,
 			@RequestParam("hinhAnh") MultipartFile hinhAnh) throws IOException {
+		// Luu biến mv để trả về trang thêm sản phẩm các nhà sản xuất, danh mục
 		ModelAndView mv = new ModelAndView("/admin/product/add-product");
 		System.out.println(model);
 		mv.addObject("dienthoai", model);
@@ -75,25 +81,25 @@ public class DienThoaiController {
 		mv.addObject("listDM", DanhMucDAO.getInstance().getList());
 
 		if (hinhAnh == null || hinhAnh.isEmpty() || hinhAnh.toString().isEmpty()) {
-			mv.addObject("message", "Vui lÃ²ng chá»�n áº£nh");
+			mv.addObject("message", "Vui lòng chọn ảnh");
 		} else {
 			try {
-				// lÆ°u Base64image
+				// lưu Base64image
 				byte[] encode = java.util.Base64.getEncoder().encode(hinhAnh.getBytes());
 				model.setBase64image(new String(encode, "UTF-8"));
 			} catch (Exception e) {
-				mv.addObject("message", "Lá»—i lÆ°u file");
+				mv.addObject("message", "Lỗi lưu file");
 			}
 		}
 
 		if (err.hasErrors()) {
-			System.out.println("Lá»—i thÃ´ng tin");
+			System.out.println("Lỗi thông tin");
 		} else
 			try {
 				{
 					DienThoaiDAO.getInstance().add(model);
 					System.out.println(model);
-					return new ModelAndView("redirect:../products");
+					return new ModelAndView("redirect:../products?txtSearch=&pageid=1");
 
 				}
 			} catch (Exception e) {
@@ -112,7 +118,7 @@ public class DienThoaiController {
 			model.addAttribute("listDM", DanhMucDAO.getInstance().getList());
 			return "admin/product/edit-product";
 		}
-		return "redirect:../login";
+		return "redirect:../../login";
 	}
 
 	@RequestMapping(value = "/edit-product", method = RequestMethod.POST)
@@ -123,7 +129,7 @@ public class DienThoaiController {
 		mv.addObject("listNSX", NhaSanXuatDAO.getInstance().getList());
 		mv.addObject("listDM", DanhMucDAO.getInstance().getList());
 
-		// náº¿u khÃ´ng cÃ³ áº£nh thÃ¬ lÆ°u láº¡i áº£nh cÅ©
+		// Nếu không có hình ảnh thì lưu lại hình ảnh trong database
 		if (hinhAnh == null || hinhAnh.isEmpty()) {
 			DienThoai dt = DienThoaiDAO.getInstance().getById(model.getMaDt());
 			model.setHinhAnh(dt.getHinhAnh());
@@ -131,24 +137,24 @@ public class DienThoaiController {
 			model.setBase64image(new String(encode, "UTF-8"));
 		} else {
 			try {
-				// lÆ°u Base64image
+				// Lưu Base64image
 				model.setHinhAnh(hinhAnh.getBytes());
 				byte[] encode = java.util.Base64.getEncoder().encode(hinhAnh.getBytes());
 				model.setBase64image(new String(encode, "UTF-8"));
 			} catch (Exception e) {
-				mv.addObject("message", "Lá»—i lÆ°u file");
+				mv.addObject("message", "Lỗi lưu file");
 			}
 		}
 
 		if (err.hasErrors()) {
-			System.out.println("Lá»—i thÃ´ng tin");
+			System.out.println("Lỗi thông tin");
 		} else
 			try {
 
 				System.out.println(model);
 
 				DienThoaiDAO.getInstance().edit(model);
-				return new ModelAndView("redirect:../products");
+				return new ModelAndView("redirect:../products?txtSearch=&pageid=1");
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -164,9 +170,17 @@ public class DienThoaiController {
 		DienThoai dt = DienThoaiDAO.getInstance().getById(maDt);
 
 		if (dt != null) {
-			DienThoaiDAO.getInstance().delete(maDt);
-			map.put("isvalid", "true");
-			return map;
+			if(DienThoaiDAO.getInstance().tontaima(maDt)) {
+				
+				map.put("tontaima", "true");
+				return map;
+			}else {
+				DienThoaiDAO.getInstance().delete(maDt);
+				map.put("tontaima", "false");
+				map.put("isvalid", "true");
+				System.out.println(map);
+				return map;
+			}
 		}
 		map.put("isvalid", "false");
 		return map;
@@ -179,6 +193,6 @@ public class DienThoaiController {
 			model.addAttribute("dienthoai", dt);
 			return "admin/product/detail-product";
 		}
-		return "redirect:../login";
+		return "redirect:../../login";
 	}
 }

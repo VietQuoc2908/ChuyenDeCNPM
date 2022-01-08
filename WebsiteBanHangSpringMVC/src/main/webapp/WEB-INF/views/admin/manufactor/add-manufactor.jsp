@@ -13,7 +13,7 @@
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item"><a href="../">Trang chủ</a></li>
+						<li class="breadcrumb-item">Trang chủ</li>
 						<li class="breadcrumb-item"><a href="../manufactores">Nhà sản xuất</a></li>
 						<li class="breadcrumb-item active">Thêm nhà sản xuất</li>
 					</ol>
